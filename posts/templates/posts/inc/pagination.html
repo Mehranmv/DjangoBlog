@@ -1,0 +1,43 @@
+{% load i18n %}
+<ul class="pagination justify-content-center">
+        {% if page.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1"><< {% trans 'اولین صفحه' %}</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page.previous_page_number }}">{% trans 'فبلی' %}</a>
+            </li>
+
+        {% endif %}
+
+        {% if page.number|add:'-4' > 1 %}
+            <li class="page-item"><a class="page-link" href="?page={{ page.number|add:'-5' }}">&hellip;</a></li>
+        {% endif %}
+
+        {% for i in page.paginator.page_range %}
+            {% if page.number == i %}
+                <li class="page-item active" aria-current="page">
+              <span class="page-link">
+                {{ i }}
+                <span class="sr-only">{% trans 'صفحه قعلی' %}</span>
+              </span>
+                </li>
+            {% elif i > page.number|add:'-5' and i < page.number|add:'5' %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page.paginator.num_pages > page.number|add:'4' %}
+            <li class="page-item"><a class="page-link" href="?page={{ page.number|add:'5' }}">&hellip;</a></li>
+        {% endif %}
+
+        {% if page.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page.next_page_number }}">{% trans 'بعدی' %}</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page.paginator.num_pages }}">{% trans 'آخرین صفحه' %} >> </a>
+            </li>
+
+        {% endif %}
+    </ul>

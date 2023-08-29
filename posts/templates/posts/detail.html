@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load i18n mptt_tags %}
+{% block content %}
+    <div class="row g-5">
+        <div class="col-md-9">
+            <div aria-label="breadcrumb" class="p-3 mb-2 bg-secondary rounded-3" style="--bs-bg-opacity: .15;">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home:home_page' %}">{% trans 'صفحه اصلی ' %} / </a></li>
+                    {% for ancestor in ancestors %}
+                        {% if post.categories == ancestor %}
+                            <li class="breadcrumb-item "><a href="{{ ancestor.get_absolute_url }}">{{ ancestor.name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    <li><a style="color: #0253c7" href="{% url 'posts:post_detail' post.slug %}">{{ post.title }}</a></li>
+                </ol>
+            </div>
+            <br/>
+            <br/>
+            <div class="bg-secondary rounded-3 p-5" style="--bs-bg-opacity: .15;">
+                <h3 style="font-weight: bold;">{{ post.title }}</h3>
+                <br/>
+                <hr style="color:#1071ff;border-width: 2px"/>
+                <div class="ratio ratio-16x9">
+                    <img
+                            src="{{ post.thumbnail.url }}"
+                            class="rounded-3"
+                            alt="{{ post.title }}"
+                            data-no-lazy="1">
+                </div>
+                <br/>
+                <div class="p-3 mb-2 d-grid align-items-center" style="grid-template-columns: 1fr auto auto;">
+                    <i class="fa-solid fa-pen">
+                        {% trans 'نویسنده :' %}
+                        <p class="d-inline">{{ post.user.first_name }} {{ post.user.last_name }}</p>
+                    </i>
+                    {{ post.updated | date:"Y/n/d" }}
+                </div>
+                <br/>
+                <div style="line-height: 2rem">
+                    <p>
+                        {{ post.body | safe }}
+                    </p>
+                </div>
+            </div>
+            <br/>
+            <hr style="color:#1071ff;border-width: 2px"/>
+            <h3>{% trans 'دیدگاه ها' %}</h3>
+            <div class="row">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="col-12 mb-3">
+                        <label for="name" class="requiredField">{% trans 'نام *' %}</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="email" class="requiredField">{% trans 'ایمیل *' %}</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="body" class="requiredField">{% trans 'نظر *' %}</label>
+                        {{ form.body }}
+                    </div>
+                    <input class="btn" type="submit" style="background-color: #0047AD" value='{% trans 'ارسال‌دیدگاه' %}'>
+                </form>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <section class="gradient-custom">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="d-flex flex-start">
+                                                <div class="flex-grow-1 flex-shrink-1">
+                                                    {% recursetree comments %}
+                                                        {% if not node.is_leaf_node %}
+                                                            <div>
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <p class="mb-1">
+                                                                        {{ node.name }} <span class="small">- {{ node.email }}</span>
+                                                                    </p>
+                                                                    <div class="dropdown dropstart">
+                                                                        <a role="button" class="" style="color: #005fe8"
+                                                                           data-bs-toggle="dropdown" aria-expanded="false"
+                                                                           data-bs-auto-close="outside">
+                                                                            <i class="fa fa-mail-reply"></i>
+                                                                        </a>
+                                                                        <form style="width: 500px;"
+                                                                              action="{% url 'posts:comment_reply' post.slug node.id %}"
+                                                                              method="post"
+                                                                              class="dropdown-menu p-4">
+                                                                            {% csrf_token %}
+                                                                            {{ reply_form.as_p }}
+                                                                            <input type="submit" class="btn" value="ارسال‌دیدگاه"
+                                                                                   style="background-color: #0047AD">
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="small mb-0">
+                                                                    {{ node.body }}
+                                                                </p>
+                                                            </div>
+                                                            {% if not node.is_leaf_node %}
+                                                                <div class="d-flex flex-start mt-4 me-5 ">
+                                                                    <div class="flex-grow-1 flex-shrink-1">
+                                                                        {{ children }}
+                                                                    </div>
+                                                                </div>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <div>
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <p class="mb-1">
+                                                                        {{ node.name }} <span class="small">- {{ node.email }}</span>
+                                                                    </p>
+                                                                    <div class="dropdown dropstart">
+                                                                        <a role="button" class="" style="color: #005fe8"
+                                                                           data-bs-toggle="dropdown" aria-expanded="false"
+                                                                           data-bs-auto-close="outside">
+                                                                            <i class="fa fa-mail-reply"></i>
+                                                                        </a>
+                                                                        <form style="width: 500px;"
+                                                                              action="{% url 'posts:comment_reply' post.slug node.id %}"
+                                                                              method="post"
+                                                                              class="dropdown-menu p-4">
+                                                                            {% csrf_token %}
+                                                                            {{ reply_form.as_p }}
+                                                                            <input type="submit" class="btn" value="{% trans 'ارسال دید‌گاه' %}"
+                                                                                   style="background-color: #0047AD;">
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="small mb-0">
+                                                                    {{ node.body }}
+                                                                </p>
+                                                            </div>
+                                                            <hr style="color:#1071ff;border-width: 2px"/>
+                                                        {% endif %}
+                                                    {% endrecursetree %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                {% include 'inc/messages.html' %}
+            </section>
+        </div>
+        <div class="col-md-3 ">
+            <div class="position-sticky" style="top: 2rem;">
+                <div class="p-3 mb-2 bg-secondary rounded-3" style="--bs-bg-opacity: .15;">
+                    <h5 class="text-center">{% trans 'آخرین مطالب این دسته' %}</h5>
+                    <hr style="color: #3636ff"/>
+                    {% for item in latest_post %}
+                        <div class="post-thumbnail ratio ratio-16x9">
+                            <img width="300" height="173"
+                                 src="{{ item.thumbnail.url }}"
+                                 class="rounded"
+                                 alt="{{ item.title }}" decoding="async"
+                                 itemprop="image" data-no-lazy="1" loading="lazy">
+                        </div>
+                        <br/>
+                        <h6 class="mb-5 text-center">
+                            <a class="text-white" style="text-decoration: none;line-height:normal"
+                               href="{% url 'posts:post_detail' item.slug %}"> {{ item.title }}</a>
+                        </h6>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

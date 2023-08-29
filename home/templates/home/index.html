@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load i18n  jformat mptt_tags %}
+{% block content %}
+    <div class="bg-secondary rounded-3 p-5" style="--bs-bg-opacity: .15;">
+        <div id="carouselExampleCaptions" class="carousel slide carousel-fade" >
+            {% include 'home/inc/carousel.html' %}
+            <div class=" p-3 mb-2 rounded" style="background-color: #0047AB">
+                <h5>{% trans 'آخرین مطالب ' %}</h5>
+            </div>
+            <div class="row mb-2">
+                {% for posts in page %}
+                    <div>
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-success-emphasis">{{ posts.categories.get }}</strong>
+                                <a href="{% url 'posts:post_detail' posts.slug %}" style="text-decoration: none;"><h5 style="padding-bottom: 5px;"
+                                                                                                                      class="mb-3">{{ posts.title }}</h5>
+                                </a>
+                                <p class="mb-auto">{{ posts.description }} </p>
+                                <div class="mb-2 text-body-secondary">
+                                    <p style="display: inline"><i class="fas fa-clock fa-xs"></i> {{ posts.updated | jformat:"%d %b %Y" }}</p>
+                                    <a href="{% url 'posts:category' posts.categories.slug %}"
+                                       class="text-primary"> <i class="fas fa-folder fa-xs"></i> {{ posts.categories }}</a>
+                                    <p style="display:inline;"><i class="fas fa-user fa-xs"></i>{{ posts.user.first_name }} {{ posts.user.last_name }}
+                                    </p>
+                                </div>
+                                <a href="{% url 'posts:post_detail' posts.slug %}"
+                                   class="text-center btn  " style="background-color: #0047AB">
+                                    {% trans 'بیشتر بخوانید' %}
+                                </a>
+                            </div>
+                            <div class="col-auto d-none d-lg-inline">
+                                <img width="500px" style="border-radius: 0 10px 10px 0 ;" src="{{ posts.thumbnail.url }}" alt="{{ posts.title }}">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    {% include 'home/inc/pagination.html' %}
+{% endblock %}

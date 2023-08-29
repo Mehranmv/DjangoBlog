@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load jformat %}
+{% block content %}
+    {% if posts %}
+        <div class=" p-3 mb-2 rounded" style="background-color: #0047AB">
+            <h5>{% trans 'نتایج جستجوی شما برای ' %} : '{{ search_query }}'</h5>
+        </div>
+        {% for post in posts %}
+            <div>
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-success-emphasis">{{ post.categories.get }}</strong>
+                        <a href="{% url 'posts:post_detail' post.slug %}" style="text-decoration: none;"><h5 style="padding-bottom: 5px;"
+                                                                                                             class="mb-3">{{ post.title }}</h5>
+                        </a>
+                        <p class="mb-auto">{{ post.description }} </p>
+                        <div class="mb-2 text-body-secondary">
+                            <p style="display: inline"><i class="fas fa-clock fa-xs"></i> {{ post.updated | jformat:"%d %b %Y" }}</p>
+                            <a href="{% url 'posts:category' post.categories.slug %}"
+                               class="text-primary"> <i class="fas fa-folder fa-xs"></i> {{ post.categories }}</a>
+                            <p style="display:inline;"><i class="fas fa-user fa-xs"></i>{{ post.user.first_name }} {{ post.user.last_name }}
+                            </p>
+                        </div>
+                        <a href="{% url 'posts:post_detail' post.slug %}"
+                           class="text-center btn  " style="background-color: #0047AB">
+                            {% trans 'بیشتر بخوانید' %}
+                        </a>
+                    </div>
+                    <div class="col-auto d-none d-lg-inline">
+                        <img width="500px" src="{{ post.thumbnail.url }}" alt="">
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h1>{% trans 'موردی یافت نشد.' %}</h1>
+        <p class="m-5">{% trans 'با عرض پوزش، اما هیچ چیز مطابق با شرایط جستجوی شما نبود. لطفا با برخی از کلمات کلیدی مختلف دوباره امتحان کنید.' %}</p>
+        <form class="d-flex" method="get" action="{% url 'home:search' %}">
+            {{ search.as_p }}
+            <input style="height: 38px;margin-top: 15px;margin-right: 5px" class="btn btn-outline-success" type="submit"
+                   value="{% trans 'جستجو' %}">
+        </form>
+    {% endif %}
+
+{% endblock %}
