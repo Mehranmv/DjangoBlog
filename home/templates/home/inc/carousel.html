@@ -1,13 +1,13 @@
 {% load jformat %}
 <div class="carousel-inner rounded" style="margin-bottom: 100px">
     <div class="carousel-item active">
-        <a href="{% url 'posts:post_detail' postss.first.slug %}">
-            <img src="{{ postss.first.thumbnail.url }}" class="d-block w-100" height="700px" alt="">
+        <a href="{% url 'posts:post_detail' posts.first.slug %}">
+            <img src="{{ posts.first.thumbnail.url }}" class="d-block w-100" height="700px" alt="">
             <div class="carousel-caption d-none d-md-block text-white bg-black rounded-5"
                  style="--bs-bg-opacity: .7;">
-                <h5>{{ postss.first.title }}</h5>
-                <p>{{ postss.first.description }}</p>
-                <p>{{ postss.first.updated | jformat:"%d %B %Y" }}</p>
+                <h5>{{ posts.first.title }}</h5>
+                <p>{{ posts.first.description }}</p>
+                <p>{{ posts.first.updated | jformat:"%d %B %Y" }}</p>
             </div>
         </a>
     </div>

@@ -5,7 +5,7 @@ from posts.models import Post
 class PostSitemap(Sitemap):
     changefreq = "daily"
     priority = 1.0
-    protocol = 'https'
+    protocol = 'http'
 
     def items(self):
         return Post.objects.all()

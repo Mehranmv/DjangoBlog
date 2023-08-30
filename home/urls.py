@@ -1,6 +1,8 @@
+# django imports
 from django.urls import path
-from . import views
 from django.contrib.sitemaps.views import sitemap
+# local imports
+from . import views
 from .sitemaps import PostSitemap
 
 app_name = 'home'

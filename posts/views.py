@@ -33,7 +33,7 @@ class PostDetailView(View):
         latest_post = Post.objects.filter(categories=post.categories)
         latest_post = latest_post.exclude(slug=post_slug)[:2]
         return render(request, 'posts/detail.html',
-                      {"post": post, 'form': form, 'categories': categories, 'latest_post': latest_post, 'ancestors': ancestors, 'comments': comments,
+                      {"post": post, 'form': form, 'latest_post': latest_post, 'ancestors': ancestors, 'comments': comments,
                        'reply_form': self.form_class_reply()})
 
     def post(self, request, post_slug):

@@ -9,14 +9,14 @@ from posts.models import Post
 class HomePage(View):
 
     def get(self, request):
-        postss = Post.objects.all()
-        carousel_posts = postss[1:5]
-        paginated = Paginator(postss, 10)
+        posts = Post.objects.all()
+        carousel_posts = posts[1:5]
+        paginated = Paginator(posts, 10)
         page_number = request.GET.get('page')
         page = paginated.get_page(page_number)
         if request.GET.get('search'):
-            page = postss.filter(body__contains=request.GET['search'])
-        return render(request, 'home/index.html', {'postss': postss, 'page': page, 'carousel_posts': carousel_posts})
+            page = posts.filter(body__contains=request.GET['search'])
+        return render(request, 'home/index.html', {'posts': posts, 'page': page, 'carousel_posts': carousel_posts})
 
 
 class SearchView(View):

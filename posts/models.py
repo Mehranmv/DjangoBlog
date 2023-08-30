@@ -83,7 +83,7 @@ class Comment(MPTTModel):
         blank=True,
         related_name='replies'
     )
-    is_accepted = models.BooleanField(default=False,verbose_name=_("تایید شده"))
+    is_accepted = models.BooleanField(default=False, verbose_name=_("تایید شده"))
 
     class MPTTMeta:
         order_insertion_by = ['id']
