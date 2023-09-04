@@ -146,3 +146,12 @@ CKEDITOR_CONFIGS = {
 }
 
 SITE_ID = 1
+
+# to have to settings
+ENVIRONMENT = os.environ.get('ENVIRONMENT', 'local')
+if ENVIRONMENT == 'local':
+    print('local settings')
+elif ENVIRONMENT == 'deploy':
+    from .delpoy_settings import *
+else:
+    raise ValueError('Invalid environment value.')

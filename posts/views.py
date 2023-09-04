@@ -16,7 +16,7 @@ class CategoryView(View):
         paginated = Paginator(posts, 10)
         page_number = request.GET.get('page')
         page = paginated.get_page(page_number)
-        posts = posts.filter(categories=category.id)
+        # posts = posts.filter(categories=category.id)
         return render(request, 'posts/category.html', {'category': category, 'posts': posts, "page": page})
 
 
@@ -25,13 +25,12 @@ class PostDetailView(View):
     form_class_reply = ReplyCommentForm
 
     def get(self, request, post_slug):
-        categories = Category.objects.all()
-        ancestors = categories.get_ancestors(include_self=True)
+        post = get_object_or_404(Post, slug=post_slug)
+        ancestors = post.categories.get_ancestors(include_self=True)
         form = self.form_class()
-        post = Post.objects.get(slug=post_slug)
         comments = Comment.objects.filter(post=post, is_accepted=True)
         latest_post = Post.objects.filter(categories=post.categories)
-        latest_post = latest_post.exclude(slug=post_slug)[:2]
+        latest_post = latest_post.exclude(id=post.id)[:2]
         return render(request, 'posts/detail.html',
                       {"post": post, 'form': form, 'latest_post': latest_post, 'ancestors': ancestors, 'comments': comments,
                        'reply_form': self.form_class_reply()})

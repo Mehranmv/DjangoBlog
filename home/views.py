@@ -14,8 +14,6 @@ class HomePage(View):
         paginated = Paginator(posts, 10)
         page_number = request.GET.get('page')
         page = paginated.get_page(page_number)
-        if request.GET.get('search'):
-            page = posts.filter(body__contains=request.GET['search'])
         return render(request, 'home/index.html', {'posts': posts, 'page': page, 'carousel_posts': carousel_posts})
 
 
