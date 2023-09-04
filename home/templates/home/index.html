@@ -12,15 +12,15 @@
                     <div>
                         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                             <div class="col p-4 d-flex flex-column position-static">
-                                <strong class="d-inline-block mb-2 text-success-emphasis">{{ posts.categories.get }}</strong>
+                                <strong class="d-inline-block mb-2 text-success-emphasis">{{ posts.category.get }}</strong>
                                 <a href="{% url 'posts:post_detail' posts.slug %}" style="text-decoration: none;"><h5 style="padding-bottom: 5px;"
                                                                                                                       class="mb-3">{{ posts.title }}</h5>
                                 </a>
                                 <p class="mb-auto">{{ posts.description }} </p>
                                 <div class="mb-2 text-body-secondary">
-                                    <p style="display: inline"><i class="fas fa-clock fa-xs"></i> {{ posts.updated | jformat:"%d %b %Y" }}</p>
-                                    <a href="{% url 'posts:category' posts.categories.slug %}"
-                                       class="text-primary"> <i class="fas fa-folder fa-xs"></i> {{ posts.categories }}</a>
+                                    <p style="display: inline"><i class="fas fa-clock fa-xs"></i> {{ posts.updated_jalali | jformat:"%d %b %Y" }}</p>
+                                    <a href="{% url 'posts:category' posts.category.slug %}"
+                                       class="text-primary"> <i class="fas fa-folder fa-xs"></i> {{ posts.category }}</a>
                                     <p style="display:inline;"><i class="fas fa-user fa-xs"></i>{{ posts.user.first_name }} {{ posts.user.last_name }}
                                     </p>
                                 </div>

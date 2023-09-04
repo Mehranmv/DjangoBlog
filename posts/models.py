@@ -3,13 +3,16 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
+# local imports
+from .managers import CommentManager
 # Third party packages import
 from mptt.models import MPTTModel, TreeForeignKey
 from ckeditor_uploader.fields import RichTextUploadingField
 from django_jalali.db import models as jmodels
+from utils import DT
 
 
-class Category(MPTTModel):
+class Category(MPTTModel, DT):
     name = models.CharField(
         max_length=50,
         verbose_name=_("نام")
@@ -45,14 +48,14 @@ class Category(MPTTModel):
         return reverse('posts:category', args=[self.slug])
 
 
-class Post(models.Model):
+class Post(DT):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='upost',
-        verbose_name=_("کاریر")
+        verbose_name=_("کاریر"),
+        default=User.objects.get()
     )
-    categories = models.ForeignKey(
+    category = models.ForeignKey(
         Category,
         related_name='cpost',
         on_delete=models.CASCADE,
@@ -78,9 +81,10 @@ class Post(models.Model):
     body = RichTextUploadingField(
         verbose_name=_("محتوای پست")
     )
-    created = jmodels.jDateTimeField(auto_now_add=True)
-    updated = jmodels.jDateTimeField(auto_now=True)
-    updated_for_xml = models.DateTimeField(auto_now=True)
+    is_carousel_item = models.BooleanField(
+        default=False,
+        verbose_name=_("نمایش در کاروسل")
+    )
 
     class Meta:
         verbose_name = _('پست')
@@ -94,11 +98,10 @@ class Post(models.Model):
         return reverse('posts:post_detail', args=[self.slug])
 
 
-class Comment(MPTTModel):
+class Comment(MPTTModel, DT):
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
-        related_name='pcomment'
     )
 
     name = models.CharField(
@@ -125,6 +128,7 @@ class Comment(MPTTModel):
         default=False,
         verbose_name=_("تایید شده")
     )
+    objects = CommentManager()
 
     class MPTTMeta:
         order_insertion_by = ['id']

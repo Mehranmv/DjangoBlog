@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('/static/fonts/Vazirmatn-Regular.ttf') format('truetype');
+}
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+}

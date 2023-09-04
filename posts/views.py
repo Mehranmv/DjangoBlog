@@ -7,17 +7,21 @@ from django.utils.translation import gettext_lazy as _
 # local imports
 from .models import Category, Post, Comment
 from .form import CommentForm, ReplyCommentForm
+import utils
 
 
 class CategoryView(View):
     def get(self, request, category_slug):
         category = Category.objects.get(slug=category_slug)
-        posts = Post.objects.filter(categories=category.id)
-        paginated = Paginator(posts, 10)
+        posts = Post.objects.filter(category=category.id)
         page_number = request.GET.get('page')
-        page = paginated.get_page(page_number)
-        # posts = posts.filter(categories=category.id)
-        return render(request, 'posts/category.html', {'category': category, 'posts': posts, "page": page})
+        page = utils.pagination(posts, page_number)
+        context = {
+            'category': category,
+            'posts': posts,
+            'page': page
+        }
+        return render(request, 'posts/category.html', context)
 
 
 class PostDetailView(View):
@@ -26,14 +30,20 @@ class PostDetailView(View):
 
     def get(self, request, post_slug):
         post = get_object_or_404(Post, slug=post_slug)
-        ancestors = post.categories.get_ancestors(include_self=True)
+        ancestors = post.category.get_ancestors(include_self=True)
         form = self.form_class()
-        comments = Comment.objects.filter(post=post, is_accepted=True)
-        latest_post = Post.objects.filter(categories=post.categories)
+        comments = Comment.objects.accepted(post)
+        latest_post = Post.objects.filter(category=post.category)
         latest_post = latest_post.exclude(id=post.id)[:2]
-        return render(request, 'posts/detail.html',
-                      {"post": post, 'form': form, 'latest_post': latest_post, 'ancestors': ancestors, 'comments': comments,
-                       'reply_form': self.form_class_reply()})
+        context = {
+            "post": post,
+            'form': form,
+            'latest_post': latest_post,
+            'ancestors': ancestors,
+            'comments': comments,
+            'reply_form': self.form_class_reply()
+        }
+        return render(request, 'posts/detail.html', context)
 
     def post(self, request, post_slug):
         post = get_object_or_404(Post, slug=post_slug)

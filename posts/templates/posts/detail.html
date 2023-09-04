@@ -2,12 +2,12 @@
 {% load i18n mptt_tags %}
 {% block content %}
     <div class="row g-5">
-        <div class="col-md-9">
+        <div class="{% if latest_post %} col-md-9 {% endif %} ">
             <div aria-label="breadcrumb" class="p-3 mb-2 bg-secondary rounded-3" style="--bs-bg-opacity: .15;">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{% url 'home:home_page' %}">{% trans 'صفحه اصلی ' %} / </a></li>
                     {% for ancestor in ancestors %}
-                        {% if post.categories == ancestor %}
+                        {% if post.category == ancestor %}
                             <li class="breadcrumb-item "><a href="{{ ancestor.get_absolute_url }}">{{ ancestor.name }}</a></li>
                         {% endif %}
                     {% endfor %}
@@ -154,28 +154,31 @@
                 {% include 'inc/messages.html' %}
             </section>
         </div>
-        <div class="col-md-3 ">
-            <div class="position-sticky" style="top: 2rem;">
-                <div class="p-3 mb-2 bg-secondary rounded-3" style="--bs-bg-opacity: .15;">
-                    <h5 class="text-center">{% trans 'آخرین مطالب این دسته' %}</h5>
-                    <hr style="color: #3636ff"/>
-                    {% for item in latest_post %}
-                        <div class="post-thumbnail ratio ratio-16x9">
-                            <img width="300" height="173"
-                                 src="{{ item.thumbnail.url }}"
-                                 class="rounded"
-                                 alt="{{ item.title }}" decoding="async"
-                                 itemprop="image" data-no-lazy="1" loading="lazy">
-                        </div>
-                        <br/>
-                        <h6 class="mb-5 text-center">
-                            <a class="text-white" style="text-decoration: none;line-height:normal"
-                               href="{% url 'posts:post_detail' item.slug %}"> {{ item.title }}</a>
-                        </h6>
-                    {% endfor %}
+        {% if latest_post %}
+            <div class="col-md-3 ">
+                <div class="position-sticky" style="top: 2rem;">
+                    <div class="p-3 mb-2 bg-secondary rounded-3" style="--bs-bg-opacity: .15;">
+                        <h5 class="text-center">{% trans 'آخرین مطالب این دسته' %}</h5>
+                        <hr style="color: #3636ff"/>
+                        {% for item in latest_post %}
+                            <div class="post-thumbnail ratio ratio-16x9">
+                                <img width="300" height="173"
+                                     src="{{ item.thumbnail.url }}"
+                                     class="rounded"
+                                     alt="{{ item.title }}" decoding="async"
+                                     itemprop="image" data-no-lazy="1" loading="lazy">
+                            </div>
+                            <br/>
+                            <h6 class="mb-5 text-center">
+                                <a class="text-white" style="text-decoration: none;line-height:normal"
+                                   href="{% url 'posts:post_detail' item.slug %}"> {{ item.title }}</a>
+                            </h6>
+                        {% endfor %}
 
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
+
     </div>
 {% endblock %}

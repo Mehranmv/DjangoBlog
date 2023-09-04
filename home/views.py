@@ -4,21 +4,39 @@ from django.views import View
 from django.core.paginator import Paginator
 # local imports
 from posts.models import Post
+import utils
+# python imports
+from random import sample
 
 
 class HomePage(View):
 
     def get(self, request):
         posts = Post.objects.all()
-        carousel_posts = posts[1:5]
-        paginated = Paginator(posts, 10)
+        carousel_posts = posts.filter(is_carousel_item=True)
+        if carousel_posts.exists():
+            if carousel_posts.count() < 4:
+                carousel_items = carousel_posts
+            else:
+                carousel_items = sample(list(carousel_posts), 4)
+        else:
+            carousel_items = sample(list(posts), 4)
         page_number = request.GET.get('page')
-        page = paginated.get_page(page_number)
-        return render(request, 'home/index.html', {'posts': posts, 'page': page, 'carousel_posts': carousel_posts})
+        page = utils.pagination(posts, page_number)
+        context = {
+            'posts': posts,
+            'page': page,
+            'carousel_items': carousel_items
+        }
+        return render(request, 'home/index.html', context)
 
 
 class SearchView(View):
     def get(self, request):
         search_query = request.GET.get('search')
         posts = Post.objects.filter(body__contains=search_query)
-        return render(request, 'home/search.html', {'posts': posts, 'search_query': search_query})
+        context = {
+            'posts': posts,
+            'search_query': search_query
+        }
+        return render(request, 'home/search.html', context)

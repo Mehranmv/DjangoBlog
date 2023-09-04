@@ -16,9 +16,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Application definition
-
 INSTALLED_APPS = [
+    # django admin interface
+    'admin_interface',
+    'colorfield',
     # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -80,8 +81,12 @@ WSGI_APPLICATION = 'A.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'blog',
+        'USER': 'mehran',
+        'PASSWORD': 'mehran',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -150,8 +155,12 @@ SITE_ID = 1
 # to have to settings
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'local')
 if ENVIRONMENT == 'local':
-    print('local settings')
+    pass
 elif ENVIRONMENT == 'deploy':
     from .delpoy_settings import *
 else:
     raise ValueError('Invalid environment value.')
+
+# admin interface
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHECKS = ["security.W019"]

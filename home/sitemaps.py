@@ -11,4 +11,4 @@ class PostSitemap(Sitemap):
         return Post.objects.all()
 
     def lastmod(self, obj):
-        return obj.updated_for_xml
+        return obj.updated
