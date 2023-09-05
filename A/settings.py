@@ -156,7 +156,7 @@ SITE_ID = 1
 # to have to settings
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'local')
 if ENVIRONMENT == 'local':
-    pass
+    from .local_settings import *
 elif ENVIRONMENT == 'deploy':
     from .delpoy_settings import *
 else:
