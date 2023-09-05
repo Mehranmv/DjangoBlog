@@ -8,7 +8,6 @@ from .managers import CommentManager
 # Third party packages import
 from mptt.models import MPTTModel, TreeForeignKey
 from ckeditor_uploader.fields import RichTextUploadingField
-from django_jalali.db import models as jmodels
 from utils import DT
 
 
@@ -53,13 +52,12 @@ class Post(DT):
         User,
         on_delete=models.CASCADE,
         verbose_name=_("کاریر"),
-        default=User.objects.get()
     )
     category = models.ForeignKey(
         Category,
-        related_name='cpost',
         on_delete=models.CASCADE,
         verbose_name=_('دسته بندی')
+
     )
     title = models.CharField(
         max_length=255,

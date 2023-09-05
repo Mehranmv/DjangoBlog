@@ -1,6 +1,7 @@
 from pathlib import Path
 import locale
 import os
+import psycopg2
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -164,3 +165,19 @@ else:
 # admin interface
 X_FRAME_OPTIONS = "SAMEORIGIN"
 SILENCED_SYSTEM_CHECKS = ["security.W019"]
+
+# postgres
+connection = psycopg2.connect(
+    host='127.0.0.1',
+    port='5432',
+    dbname='blog',
+    user='mehran',
+    password='mehran'
+)
+
+cursor = connection.cursor()
+cursor.execute("CREATE EXTENSION IF NOT EXISTS pg_trgm;")
+connection.commit()
+
+cursor.close()
+connection.close()

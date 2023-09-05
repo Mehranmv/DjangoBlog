@@ -6,3 +6,7 @@
 body {
     font-family: 'Vazirmatn', sans-serif;
 }
+
+img {
+    border-radius: 10px;
+}

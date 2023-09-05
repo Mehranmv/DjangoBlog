@@ -1,7 +1,7 @@
 # Django imports
 from django.shortcuts import render
 from django.views import View
-from django.core.paginator import Paginator
+from django.contrib.postgres.search import TrigramWordSimilarity
 # local imports
 from posts.models import Post
 import utils
@@ -33,8 +33,10 @@ class HomePage(View):
 
 class SearchView(View):
     def get(self, request):
+        posts = Post.objects.all()
         search_query = request.GET.get('search')
-        posts = Post.objects.filter(body__contains=search_query)
+        posts = posts.annotate(similarity=TrigramWordSimilarity(search_query, 'title')).filter(similarity__gt=0.3).order_by('-similarity')
+        # posts = Post.objects.filter(body__contains=search_query)
         context = {
             'posts': posts,
             'search_query': search_query

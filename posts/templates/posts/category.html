@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n jformat%}
+{% load i18n jformat %}
 {% block content %}
     <div class="p-3 mb-2 rounded" style="background-color: #0047AB">
         <h5>{% trans 'آخرین مطالب دسته:' %} {{ category.name }}</h5>
@@ -16,7 +16,7 @@
                                 <a href="{% url 'posts:post_detail' post.slug %}">
                                     <img style="width: 100%;height: 100%;border-radius: 20px;" data-lazyloaded="1"
                                          src="{{ post.thumbnail.url }}"
-                                         alt="{{ post.title }}" >
+                                         alt="{{ post.title }}">
                                 </a>
                             </div>
                         </div>
