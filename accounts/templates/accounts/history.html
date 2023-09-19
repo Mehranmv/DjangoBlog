@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load jformat %}
+{% load i18n %}
+{% block content %}
+    <div class="bg-secondary rounded-3 p-5 mb-1" style="--bs-bg-opacity: .15;">
+        {% if membership.exists %}
+            {% for items in membership %}
+                <h3>{% trans 'سطح خریداری شده :' %} {{ items.plan_type }}</h3>
+                <br/>
+                <p class="d-inline">{% trans 'خریداری شده در تاریخ :' %} {{ items.start_date | jformat:"%d %b %Y" }} ----- </p>
+                <p class="d-inline">{% trans 'پایان در تاریخ :' %} {{ items.end_date | jformat:"%d %b %Y" }}</p>
+                <hr/>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

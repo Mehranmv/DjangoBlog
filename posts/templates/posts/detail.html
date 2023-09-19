@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
+{% load ratings %}
+{% load jformat %}
 {% load i18n mptt_tags %}
+{% block meta %}
+    <title>{{ post.seo_title }}</title>
+    <meta name="keywords" content="{{ post.seo_keywords }}">
+    <meta name="description" content="{{ post.seo_description }}">
+
+{% endblock %}
 {% block content %}
     <div class="row g-5">
         <div class="{% if latest_post %} col-md-9 {% endif %} ">
@@ -10,13 +18,28 @@
                         {% if post.category == ancestor %}
                             <li class="breadcrumb-item "><a href="{{ ancestor.get_absolute_url }}">{{ ancestor.name }}</a></li>
                         {% endif %}
-                    {% endfor %}
+                    {% endfor return JsonResponse({}, status=400) %}
                     <li><a style="color: #0253c7" href="{% url 'posts:post_detail' post.slug %}">{{ post.title }}</a></li>
                 </ol>
             </div>
             <br/>
             <br/>
             <div class="bg-secondary rounded-3 p-5" style="--bs-bg-opacity: .15;">
+                {% if request.user.is_authenticated %}
+                    {% if is_bookmarked %}
+                        <button class="bookmark-btn" data-post-id="{{ post.id }}" data-bookmarked="True">
+                            {% trans 'ذخیزه شده' %}
+                        </button>
+                    {% else %}
+                        <button class="bookmark-btn" data-post-id="{{ post.id }}" data-bookmarked="False">
+                            {% trans 'ذخیره کردن' %}
+                        </button>
+                    {% endif %}
+                {% else %}
+                    <button disabled>
+                        {% trans 'ذخیره کردن' %}
+                    </button>
+                {% endif %}
                 <h3 style="font-weight: bold;">{{ post.title }}</h3>
                 <br/>
                 <hr style="color:#1071ff;border-width: 2px"/>
@@ -33,7 +56,7 @@
                         {% trans 'نویسنده :' %}
                         <p class="d-inline">{{ post.user.first_name }} {{ post.user.last_name }}</p>
                     </i>
-                    {{ post.updated | date:"Y/n/d" }}
+                    {{ post.updated_jalali | jformat:"%d %b %Y" }}
                 </div>
                 <br/>
                 <div style="line-height: 2rem">
@@ -42,117 +65,14 @@
                     </p>
                 </div>
             </div>
+
+
+            {% ratings post %}
+
+
             <br/>
             <hr style="color:#1071ff;border-width: 2px"/>
-            <h3>{% trans 'دیدگاه ها' %}</h3>
-            <div class="row">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <div class="col-12 mb-3">
-                        <label for="name" class="requiredField">{% trans 'نام *' %}</label>
-                        {{ form.name }}
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label for="email" class="requiredField">{% trans 'ایمیل *' %}</label>
-                        {{ form.email }}
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label for="body" class="requiredField">{% trans 'نظر *' %}</label>
-                        {{ form.body }}
-                    </div>
-                    <input class="btn" type="submit" style="background-color: #0047AD" value='{% trans 'ارسال‌دیدگاه' %}'>
-                </form>
-            </div>
-            <br/>
-            <br/>
-            <br/>
-            <section class="gradient-custom">
-                <div class="container">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-body p-4">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="d-flex flex-start">
-                                                <div class="flex-grow-1 flex-shrink-1">
-                                                    {% recursetree comments %}
-                                                        {% if not node.is_leaf_node %}
-                                                            <div>
-                                                                <div class="d-flex justify-content-between align-items-center">
-                                                                    <p class="mb-1">
-                                                                        {{ node.name }} <span class="small">- {{ node.email }}</span>
-                                                                    </p>
-                                                                    <div class="dropdown dropstart">
-                                                                        <a role="button" class="" style="color: #005fe8"
-                                                                           data-bs-toggle="dropdown" aria-expanded="false"
-                                                                           data-bs-auto-close="outside">
-                                                                            <i class="fa fa-mail-reply"></i>
-                                                                        </a>
-                                                                        <form style="width: 500px;"
-                                                                              action="{% url 'posts:comment_reply' post.slug node.id %}"
-                                                                              method="post"
-                                                                              class="dropdown-menu p-4">
-                                                                            {% csrf_token %}
-                                                                            {{ reply_form.as_p }}
-                                                                            <input type="submit" class="btn" value="ارسال‌دیدگاه"
-                                                                                   style="background-color: #0047AD">
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                                <p class="small mb-0">
-                                                                    {{ node.body }}
-                                                                </p>
-                                                            </div>
-                                                            {% if not node.is_leaf_node %}
-                                                                <div class="d-flex flex-start mt-4 me-5 ">
-                                                                    <div class="flex-grow-1 flex-shrink-1">
-                                                                        {{ children }}
-                                                                    </div>
-                                                                </div>
-                                                            {% endif %}
-                                                        {% else %}
-                                                            <div>
-                                                                <div class="d-flex justify-content-between align-items-center">
-                                                                    <p class="mb-1">
-                                                                        {{ node.name }} <span class="small">- {{ node.email }}</span>
-                                                                    </p>
-                                                                    <div class="dropdown dropstart">
-                                                                        <a role="button" class="" style="color: #005fe8"
-                                                                           data-bs-toggle="dropdown" aria-expanded="false"
-                                                                           data-bs-auto-close="outside">
-                                                                            <i class="fa fa-mail-reply"></i>
-                                                                        </a>
-                                                                        <form style="width: 500px;"
-                                                                              action="{% url 'posts:comment_reply' post.slug node.id %}"
-                                                                              method="post"
-                                                                              class="dropdown-menu p-4">
-                                                                            {% csrf_token %}
-                                                                            {{ reply_form.as_p }}
-                                                                            <input type="submit" class="btn" value="{% trans 'ارسال دید‌گاه' %}"
-                                                                                   style="background-color: #0047AD;">
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                                <p class="small mb-0">
-                                                                    {{ node.body }}
-                                                                </p>
-                                                            </div>
-                                                            <hr style="color:#1071ff;border-width: 2px"/>
-                                                        {% endif %}
-                                                    {% endrecursetree %}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                {% include 'inc/messages.html' %}
-            </section>
+            {% include 'posts/inc/comments.html' %}
         </div>
         {% if latest_post %}
             <div class="col-md-3 ">
@@ -179,6 +99,31 @@
                 </div>
             </div>
         {% endif %}
-
     </div>
+    <script>
+        $(document).ready(function () {
+            $(".bookmark-btn").click(function () {
+                var postId = $(this).data("post-id");
+                var isBookmarked = $(this).data("bookmarked");
+
+                $.ajax({
+                    url: "{% url 'posts:bookmark_post'%}",
+                    type: "POST",
+                    data: {
+                        post_id: postId,
+                        is_bookmarked: isBookmarked,
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.is_bookmarked) {
+                            $(".bookmark-btn[data-post-id='" + postId + "']").text("{% trans 'ذخیره شده' %}");
+                        } else {
+                            $(".bookmark-btn[data-post-id='" + postId + "']").text("{% trans 'ذخیره کردن' %}");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

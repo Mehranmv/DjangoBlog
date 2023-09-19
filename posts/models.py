@@ -4,11 +4,12 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 # local imports
-from .managers import CommentManager
+from .managers import CommentManager, PostManager
 # Third party packages import
 from mptt.models import MPTTModel, TreeForeignKey
 from ckeditor_uploader.fields import RichTextUploadingField
-from utils import DT
+from utils import DT, SEO
+from star_ratings.models import Rating
 
 
 class Category(MPTTModel, DT):
@@ -47,7 +48,11 @@ class Category(MPTTModel, DT):
         return reverse('posts:category', args=[self.slug])
 
 
-class Post(DT):
+class Post(DT, SEO):
+    STATUS_CHOICES = (
+        ('scheduled', 'Scheduled'),
+        ('published', 'Published'),
+    )
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -61,7 +66,7 @@ class Post(DT):
     )
     title = models.CharField(
         max_length=255,
-        verbose_name=_('عنوان')
+        verbose_name=_('عنوان'),
     )
     description = models.CharField(
         max_length=120,
@@ -83,6 +88,21 @@ class Post(DT):
         default=False,
         verbose_name=_("نمایش در کاروسل")
     )
+    display_post = models.BooleanField(
+        default=True,
+        verbose_name=_("نمایش پست")
+    )
+    publish_date = models.DateTimeField(
+        verbose_name=_("زمان انتشار"),
+        null=True,
+        blank=True,
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='published'
+    )
+    objects = PostManager()
 
     class Meta:
         verbose_name = _('پست')
@@ -94,6 +114,10 @@ class Post(DT):
 
     def get_absolute_url(self):
         return reverse('posts:post_detail', args=[self.slug])
+
+    def average_rating(self):
+        ratings = Rating.objects.filter(object_id=self.id, content_type__model='post')
+        return ratings.aggregate(models.Avg('rating'))['rating__avg']
 
 
 class Comment(MPTTModel, DT):
@@ -137,3 +161,25 @@ class Comment(MPTTModel, DT):
 
     def __str__(self):
         return f'{self.email} - {self.name}'
+
+    def like_count(self):
+        return self.clike.count()
+
+
+class Bookmark(DT):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE
+    )
+
+
+class Like(DT):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ulike')
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="clike")
+
+    def __str__(self):
+        return {self.comment}

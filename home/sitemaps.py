@@ -8,7 +8,7 @@ class PostSitemap(Sitemap):
     protocol = 'http'
 
     def items(self):
-        return Post.objects.all()
+        return Post.objects.filter(display_post=True)
 
     def lastmod(self, obj):
         return obj.updated

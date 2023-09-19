@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="login-wrap py-5">
+                        <div class="img d-flex align-items-center justify-content-center"></div>
+                        <h3 class="text-center mb-0">{% trans 'خوش آمدید' %}</h3>
+                        <br/>
+                        <p class="text-center">{% trans 'مشخصات زیر را وارد کنید' %}</p>
+                        <form action="#" method="post" class="login-form">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="form-group">
+                                <button style="background-color: #0047AD" type="submit"
+                                        class="btn form-control rounded submit px-3">{% trans 'ثبت نام' %}</button>
+                            </div>
+                            <br/>
+                        </form>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col w-100 text-center">
+                                    <p class="mb-0 mb-2">{% trans 'حساب کاربری دارید ؟' %}</p>
+                                    <a href="{% url 'accounts:user_login' %}">{% trans 'وارد شوید' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

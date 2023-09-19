@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import Category, Post, Comment
+from .models import Category, Post, Comment, Bookmark
 from mptt.admin import MPTTModelAdmin
 from django.utils.translation import gettext_lazy as _
+
+admin.site.register(Bookmark)
 
 
 @admin.action(description=_("تایید کردن دیدگاه ها"))
@@ -36,8 +38,10 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'body')
     prepopulated_fields = {
         'slug': ('title',),
+        'seo_title': ('title',),
+        "seo_description": ('description',)
     }
-    actions = [enable_in_carousel,disable_in_carousel]
+    actions = [enable_in_carousel, disable_in_carousel]
     raw_id_fields = ('category', 'user')
     fieldsets = [
         (
@@ -46,10 +50,10 @@ class PostAdmin(admin.ModelAdmin):
                 "fields": ["user", "category"],
             },
         ),
+
         (
             _("عنوان و اسلاگ"),
             {
-                "classes": ["collapse"],
                 "fields": ["title", "slug", "description"],
 
             }
@@ -57,22 +61,31 @@ class PostAdmin(admin.ModelAdmin):
         (
             _("تصویر پست"),
             {
-                "classes": ["collapse"],
                 "fields": ['thumbnail'],
             }
         ),
         (
             _("محتوای پست"),
             {
-                "classes": ["collapse"],
                 "fields": ["body"],
             },
         ),
         (
-            _("نمایش در کاروسل"),
+            _(" زمانبندی انتشار"),
             {
-                "classes": ["collapse"],
-                "fields": ["is_carousel_item"],
+                "fields": ["publish_date", "status"],
+            }
+        ),
+        (
+            _("تنظیمات سئو"),
+            {
+                "fields": ["seo_title", "seo_description", "seo_keywords"],
+            }
+        ),
+        (
+            _("تنظیمات نمایش "),
+            {
+                "fields": ["is_carousel_item", "display_post"],
             }
         )
     ]
@@ -84,3 +97,35 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('is_accepted',)
     search_fields = ('name', 'body')
     actions = [make_accepted]
+    fieldsets = [
+        (
+            None,
+            {
+                "fields": ["post"],
+            },
+        ),
+        (
+            _("نام و ایمیل"),
+            {
+                "fields": ["name", 'email']
+            }
+        ),
+        (
+            _("نظر"),
+            {
+                "fields": ["body"]
+            }
+        ),
+        (
+            _("تایید کردن"),
+            {
+                'fields': ["is_accepted"]
+            }
+        ),
+        (
+            _("ریپلای"),
+            {
+                "fields": ['parent']
+            }
+        )
+    ]

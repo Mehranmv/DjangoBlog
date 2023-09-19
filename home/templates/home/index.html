@@ -1,44 +1,110 @@
 {% extends 'base.html' %}
 {% load i18n  jformat mptt_tags %}
 {% block content %}
-    <div class="bg-secondary rounded-3 p-5" style="--bs-bg-opacity: .15;">
-        <div id="carouselExampleCaptions" class="carousel slide carousel-fade" >
-            {% include 'home/inc/carousel.html' %}
-            <div class=" p-3 mb-2 rounded" style="background-color: #0047AB">
-                <h5>{% trans 'آخرین مطالب ' %}</h5>
-            </div>
-            <div class="row mb-2">
-                {% for posts in page %}
-                    <div>
-                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                            <div class="col p-4 d-flex flex-column position-static">
-                                <strong class="d-inline-block mb-2 text-success-emphasis">{{ posts.category.get }}</strong>
-                                <a href="{% url 'posts:post_detail' posts.slug %}" style="text-decoration: none;"><h5 style="padding-bottom: 5px;"
-                                                                                                                      class="mb-3">{{ posts.title }}</h5>
-                                </a>
-                                <p class="mb-auto">{{ posts.description }} </p>
-                                <div class="mb-2 text-body-secondary">
-                                    <p style="display: inline"><i class="fas fa-clock fa-xs"></i> {{ posts.updated_jalali | jformat:"%d %b %Y" }}</p>
-                                    <a href="{% url 'posts:category' posts.category.slug %}"
-                                       class="text-primary"> <i class="fas fa-folder fa-xs"></i> {{ posts.category }}</a>
-                                    <p style="display:inline;"><i class="fas fa-user fa-xs"></i>{{ posts.user.first_name }} {{ posts.user.last_name }}
-                                    </p>
+    <div class="row">
+        <div class="col-12">
+            <div class="header-nav">
+                <div class="header-nav-middle">
+                    <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
+                        <div class="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu">
+                            <div class="offcanvas-body">
+                                <ul class="navbar-nav">
+                                    {% recursetree menu_items %}
+                                        {% if not node.is_leaf_node %}
+                                            <li class="nav-item {% if node.is_leaf_node %} dropdown-submenu {% endif %}">
+                                                <a class="nav-link nav-link-2 ps-xl-2 ps-0" href="">{{ node.name }}</a>
+                                                {% if not node.is_leaf_node %}
+                                                    <ul class="dropdown-menu dropdown-submenu">
+                                                        <li>
+                                                            <a href="" class="dropdown-item">{{ children }}</a>
+                                                        </li>
+                                                    </ul>
+                                                {% endif %}
+                                            </li>
+                                        {% else %}
+                                            <li >
+                                                <a class="dropdown-item nav-link nav-link-2 ps-xl-2 ps-0" href=""> {{ node.name }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endrecursetree %}
+                                    <li class="nav-item"><a class="nav-link nav-link-2 ps-xl-2 ps-0" href="https://termehostoreh.ir/"
+                                                            title="صفحه اصلی">صفحه اصلی</a></li>
+                                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="/product-category/buy-terme/"
+                                                                     title="فروشگاه" data-bs-toggle="dropdown">فروشگاه</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" title="رومیزی ترمه" href="/product-category/buy-terme/buy-terme-tablecloth/">رومیزی
+                                                ترمه</a></li>
+                                    </a>
                                 </div>
-                                <a href="{% url 'posts:post_detail' posts.slug %}"
-                                   class="text-center btn  " style="background-color: #0047AB">
-                                    {% trans 'بیشتر بخوانید' %}
-                                </a>
-                            </div>
-                            <div class="col-auto d-none d-lg-inline">
-                                <img width="500px" style="border-radius: 0 10px 10px 0 ;" src="{{ posts.thumbnail.url }}" alt="{{ posts.title }}">
+                                            <li><a class="dropdown-item" title="رانر ترمه" href="/product-category/buy-terme/bun-runner-terme/">رانر
+                                                ترمه</a></li>
+                                            <li><a class="dropdown-item" title="سجاده ترمه" href="/product-category/buy-terme/buy-terme-prayer-mat/">سجاده
+                                                ترمه</a></li>
+                                            <li><a class="dropdown-item" title="بقچه ترمه" href="/product-category/buy-terme/buy-terme-bundle/">بقچه
+                                                ترمه</a></li>
+                                            <li><a class="dropdown-item" title="روتختی ترمه" href="/product-category/buy-terme/buy-terme-bedspread/">روتختی
+                                                ترمه</a></li>
+                                            <li><a class="dropdown-item" title="کوسن ترمه" href="/product-category/buy-terme/buy-terme-cushion/">کوسن
+                                                ترمه</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link nav-link-2 ps-xl-2 ps-0" href="https://termehostoreh.ir/faqs"
+                                                            title="سوالات متداول">سوالات متداول</a></li>
+                                    <li class="nav-item"><a class="nav-link nav-link-2 ps-xl-2 ps-0" href="https://termehostoreh.ir/contact-us/"
+                                                            title="تماس با ما">تماس با ما</a></li>
+                                    <li class="nav-item"><a class="nav-link nav-link-2 ps-xl-2 ps-0" href="https://termehostoreh.ir/blog/"
+                                                            title="مجله ترمه اسطوره">مجله ترمه اسطوره</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-    <br/>
-    <br/>
-    {% include 'home/inc/pagination.html' %}
+    <div class="bg-secondary rounded-3 p-2 mb-1" style="--bs-bg-opacity: .15;">
+
+        <div class="bg-secondary rounded-3 p-5" style="--bs-bg-opacity: .15;">
+            <div id="carouselExampleCaptions" class="carousel slide carousel-fade">
+                {% include 'home/inc/carousel.html' %}
+                <div class=" p-3 mb-2 rounded" style="background-color: #0047AB">
+                    <h5>{% trans 'آخرین مطالب ' %}</h5>
+                </div>
+                <div class="row mb-2">
+                    {% for posts in page %}
+                        <div>
+                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <strong class="d-inline-block mb-2 text-success-emphasis">{{ posts.category.get }}</strong>
+                                    <a href="{{ posts.get_absolute_url }}" style="text-decoration: none;"><h5 style="padding-bottom: 5px;"
+                                                                                                              class="mb-3">{{ posts.title }}</h5>
+                                    </a>
+                                    <p class="mb-auto">{{ posts.description }} </p>
+                                    <div class="mb-2 text-body-secondary">
+                                        <p style="display: inline"><i class="fas fa-clock fa-xs"></i> {{ posts.updated_jalali | jformat:"%d %b %Y" }}
+                                        </p>
+                                        <a href="{{ posts.category.get_absolute_url }}"
+                                           class="text-primary"> <i class="fas fa-folder fa-xs"></i> {{ posts.category }}</a>
+                                        <p style="display:inline;"><i
+                                                class="fas fa-user fa-xs"></i>{{ posts.user.first_name }} {{ posts.user.last_name }}
+                                        </p>
+                                    </div>
+                                    <a href="{{ posts.get_absolute_url }}"
+                                       class="text-center btn  " style="background-color: #0047AB">
+                                        {% trans 'بیشتر بخوانید' %}
+                                <div class="col-auto d-none d-lg-inline">
+                                    <a href="{{ posts.get_absolute_url }}">
+                                        <img width="500px" style="border-radius: 0 10px 10px 0 ;" src="{{ posts.thumbnail.url }}"
+                                             alt="{{ posts.title }}">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        {% include 'home/inc/pagination.html' %}
 {% endblock %}

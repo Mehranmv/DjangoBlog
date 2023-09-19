@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     # Third-party apps
+    'star_ratings',
     'mptt',
     'ckeditor',
     'ckeditor_uploader',
@@ -38,9 +39,12 @@ INSTALLED_APPS = [
     'jdatetime',
     'fontawesomefree',
     'jalali_date',
+    'mathfilters',
     # local apps
     'home.apps.HomeConfig',
     'posts.apps.PostsConfig',
+    'accounts.apps.AccountsConfig',
+    'pages.apps.PagesConfig'
 
 ]
 
@@ -154,6 +158,7 @@ CKEDITOR_CONFIGS = {
 SITE_ID = 1
 
 # to have to settings
+# export ENVIRONMENT=local
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'local')
 if ENVIRONMENT == 'local':
     from .local_settings import *
@@ -166,18 +171,11 @@ else:
 X_FRAME_OPTIONS = "SAMEORIGIN"
 SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
-# postgres
-connection = psycopg2.connect(
-    host='127.0.0.1',
-    port='5432',
-    dbname='blog',
-    user='mehran',
-    password='mehran'
-)
+# rating
+STAR_RATINGS_STAR_HEIGHT = 24
+STAR_RATINGS_STAR_WIDTH = 24
+template_name = "star_ratings/widget.html"
 
-cursor = connection.cursor()
-cursor.execute("CREATE EXTENSION IF NOT EXISTS pg_trgm;")
-connection.commit()
-
-cursor.close()
-connection.close()
+# zarinpal
+MERCHANT = "00000000-0000-0000-0000-000000000000"
+SANDBOX = True

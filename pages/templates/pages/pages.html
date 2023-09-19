@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load jformat %}
+
+{% block content %}
+    <div class="bg-secondary rounded-3 p-2 mb-1" style="--bs-bg-opacity: .15;">
+        <h1>{{ page.title }}</h1>
+        <small>{{ post.updated_jalali | jformat:"%d %b %Y" }}</small>
+        <p>{{ page.description }}</p>
+    </div>
+{% endblock %}

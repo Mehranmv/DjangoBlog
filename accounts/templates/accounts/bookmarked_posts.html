@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load jformat %}
+{% load i18n %}
+
+{% block content %}
+    <div class=" p-3 mb-2 rounded d-flex" style="background-color: #0047AB;  justify-content: space-between;align-items: center">
+        <h5 class="d-inline" style="justify-content: space-between">{% trans 'پست های ذخیره شده' %}</h5>
+        <a href="{% url 'accounts:user_profile' %}" class="btn btn-light d-inline">{% trans 'بازگشت به پروفایل' %}</a>
+    </div>
+    <div class=" row mb-2">
+        {% for posts in bookmarked_posts %}
+            <div>
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-success-emphasis">{{ posts.category.get }}</strong>
+                        <a href="{{ posts.get_absolute_url }}" style="text-decoration: none;"><h5 style="padding-bottom: 5px;"
+                                                                                                  class="mb-3">{{ posts.title }}</h5>
+                        </a>
+                        <p class="mb-auto">{{ posts.description }} </p>
+                        <div class="mb-2 text-body-secondary">
+                            <p style="display: inline"><i class="fas fa-clock fa-xs"></i> {{ posts.updated_jalali | jformat:"%d %b %Y" }}</p>
+                            <a href="{{ posts.category.get_absolute_url }}"
+                               class="text-primary"> <i class="fas fa-folder fa-xs"></i> {{ posts.category }}</a>
+                            <p style="display:inline;"><i class="fas fa-user fa-xs"></i>{{ posts.user.first_name }} {{ posts.user.last_name }}
+                            </p>
+                        </div>
+                        <a href="{{ posts.get_absolute_url }}"
+                           class="text-center btn  " style="background-color: #0047AB">
+                            {% trans 'بیشتر بخوانید' %}
+                        </a>
+                    </div>
+                    <div class="col-auto d-none d-lg-inline">
+                        <a href="{{ posts.get_absolute_url }}">
+                            <img width="500px" style="border-radius: 0 10px 10px 0 ;" src="{{ posts.thumbnail.url }}" alt="{{ posts.title }}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

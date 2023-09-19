@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load i18n mathfilters %}
+{% block meta %}
+
+{% endblock %}
+{% block content %}
+    <div class="bg-secondary rounded-3 p-5 " style="--bs-bg-opacity: .15;">
+        <h1 class="text-center">{% trans 'بسته مورد نظر خود را انتخاب کنید' %}</h1>
+        <hr/>
+        <br/>
+        <div class=" mb-3 text-center">
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">{% trans 'طلایی' %}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">{{ amount }}<small
+                                class="text-body-secondary fw-light">/{% trans 'ماهانه' %}</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>{% trans ' دانلود برنامه های ویژه' %}</li>
+                            <li>{% trans 'دیدن پست های ویژه' %}</li>
+                        </ul>
+                        <a href="{% url 'accounts:buy_vip' 1 %}" class="w-100 btn btn-lg btn-primary">{% trans 'پرداخت' %}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col ">
+                <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                    <div class="card-header py-3 text-bg-primary border-primary">
+                        <h4 class="my-0 fw-normal">{% trans 'الماسی' %}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">{{ amount2 }}<small
+                                class="text-body-secondary fw-light">/{% trans 'ماهانه' %}</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>{% trans ' تمام امکانات بسته طلایی' %}</li>
+                            <li>{% trans 'فیلتر شمت رایگان' %}</li>
+                        </ul>
+                        <a href="{% url 'accounts:buy_vip' 2 %}" class="w-100 btn btn-lg btn-primary">{% trans 'پرداخت' %}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm border-primary p-3">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ coupon.as_p }}
+                        <input class="btn btn-primary" type="submit" value="{% trans 'ثبت' %}">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

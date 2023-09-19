@@ -1,11 +1,12 @@
 # Django imports
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from django.core.paginator import Paginator
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
+from django.http import JsonResponse
 # local imports
-from .models import Category, Post, Comment
+from .models import Category, Post, Comment, Bookmark, Like
 from .form import CommentForm, ReplyCommentForm
 import utils
 
@@ -29,18 +30,26 @@ class PostDetailView(View):
     form_class_reply = ReplyCommentForm
 
     def get(self, request, post_slug):
-        post = get_object_or_404(Post, slug=post_slug)
+        post = get_object_or_404(Post, slug=post_slug, )
         ancestors = post.category.get_ancestors(include_self=True)
         form = self.form_class()
         comments = Comment.objects.accepted(post)
         latest_post = Post.objects.filter(category=post.category)
         latest_post = latest_post.exclude(id=post.id)[:2]
+        is_bookmarked = False
+        if request.user.is_authenticated:
+            try:
+                Bookmark.objects.get(user=request.user, post=post)
+                is_bookmarked = True
+            except Bookmark.DoesNotExist:
+                is_bookmarked = False
         context = {
             "post": post,
             'form': form,
             'latest_post': latest_post,
             'ancestors': ancestors,
             'comments': comments,
+            'is_bookmarked': is_bookmarked,
             'reply_form': self.form_class_reply()
         }
         return render(request, 'posts/detail.html', context)
@@ -70,3 +79,31 @@ class CommentReplyView(View):
             reply.save()
             messages.success(request, _("نظر شما ثبت و پس از تایید به کاربران نمایش داده میشود"), 'success')
             return redirect('posts:post_detail', post.slug)
+
+
+class BookmarkPost(LoginRequiredMixin, View):
+    def post(self, request):
+        if request.user.is_authenticated:
+            post_id = request.POST.get("post_id")
+            is_bookmarked = request.POST.get("is_bookmarked") == "True"
+            post = get_object_or_404(Post, id=post_id)
+            if is_bookmarked:
+                Bookmark.objects.filter(user=request.user, post=post).delete()
+                is_bookmarked = False
+                return JsonResponse({"is_bookmarked": is_bookmarked}, status=200)
+            else:
+                Bookmark.objects.create(user=request.user, post=post)
+                is_bookmarked = True
+                return JsonResponse({"is_bookmarked": is_bookmarked}, status=200)
+        return JsonResponse({"error": ""}, status=400)
+
+
+class CommentLikeView(LoginRequiredMixin, View):
+    def get(self, request, comment_id):
+        comment = get_object_or_404(Comment, id=comment_id)
+        like = Like.objects.filter(comment=comment, user=request.user)
+        if like.exists():
+            like.delete()
+        else:
+            Like.objects.create(comment=comment, user=request.user)
+        return redirect('posts:post_detail', comment.post.slug)

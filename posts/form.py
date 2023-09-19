@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment
+from .models import Comment, Post
 from django.utils.translation import gettext_lazy as _
 
 

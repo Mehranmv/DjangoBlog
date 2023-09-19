@@ -1,0 +1,14 @@
+{% load mptt_tags %}
+
+<ul class="nav flex-column">
+    {% recursetree menu_items %}
+        <li class="nav-item">
+            <a class="nav-link" href="#">{{ node.name }}</a>
+            {% if not node.is_leaf_node %}
+                <ul class="nav flex-column">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
