@@ -225,7 +225,7 @@ msgstr ""
 
 #: home/apps.py:7
 msgid "صفحه اصلی"
-msgstr ""
+msgstr "صفحه اصلی"
 
 #: home/forms.py:8
 msgid "به دنبال چه می‌گردید؟"
@@ -242,7 +242,7 @@ msgstr ""
 
 #: home/models.py:27 home/models.py:28
 msgid "منو"
-msgstr ""
+msgstr "منو"
 
 #: home/templates/home/inc/pagination.html:5
 #: posts/templates/posts/inc/pagination.html:5
