@@ -1,0 +1,542 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-20 09:11+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: A/settings.py:125
+msgid "Farsi"
+msgstr "فارسی"
+
+#: A/settings.py:126
+msgid "English"
+msgstr "انگلیسی"
+
+#: accounts/forms.py:7 accounts/forms.py:27
+#: accounts/templates/accounts/profile.html:40
+msgid "نام کاربری"
+msgstr "نام کاربری"
+
+#: accounts/forms.py:15 accounts/forms.py:35
+msgid "کلمه عبور"
+msgstr "کلمه عبور"
+
+#: accounts/forms.py:44 accounts/templates/accounts/profile.html:36
+#: posts/models.py:136
+msgid "ایمیل"
+msgstr "ایمیل"
+
+#: accounts/forms.py:53 home/models.py:10 posts/models.py:18
+#: posts/models.py:131
+msgid "نام"
+msgstr "نام"
+
+#: accounts/forms.py:62
+msgid "نام خانوادگی"
+msgstr "نام خانوادگی"
+
+#: accounts/forms.py:73
+msgid "کد تخفیف دارید ؟ وارد کنید"
+msgstr "کد تخفیف دارید ؟ وارد کنید"
+
+#: accounts/models.py:10
+msgid "کد"
+msgstr "کد"
+
+#: accounts/models.py:16
+msgid "درصد تخفیف"
+msgstr "درصد تخفیف"
+
+#: accounts/models.py:23
+msgid "مبلغ تخفیف"
+msgstr "مبلغ تخفیف"
+
+#: accounts/models.py:30
+msgid "سقف مبلع تخفیف"
+msgstr "سقف مبلع تخفیف"
+
+#: accounts/models.py:37
+msgid "تعداد استفاده"
+msgstr "تعداد استفاده"
+
+#: accounts/templates/accounts/bookmarked_posts.html:7
+#: accounts/templates/accounts/profile.html:55
+msgid "پست های ذخیره شده"
+msgstr "پست های ذخیره شده"
+
+#: accounts/templates/accounts/bookmarked_posts.html:8
+msgid "بازگشت به پروفایل"
+msgstr "بازگشت به پروفایل"
+
+#: accounts/templates/accounts/bookmarked_posts.html:29
+#: home/templates/home/index.html:70 home/templates/home/search.html:27
+#: posts/templates/posts/category.html:50
+msgid "بیشتر بخوانید"
+msgstr ""
+
+#: accounts/templates/accounts/buy_membership.html:8
+msgid "بسته مورد نظر خود را انتخاب کنید"
+msgstr ""
+
+#: accounts/templates/accounts/buy_membership.html:15 accounts/views.py:219
+msgid "طلایی"
+msgstr ""
+
+#: accounts/templates/accounts/buy_membership.html:19
+#: accounts/templates/accounts/buy_membership.html:35
+msgid "ماهانه"
+msgstr ""
+
+#: accounts/templates/accounts/buy_membership.html:21
+msgid " دانلود برنامه های ویژه"
+msgstr ""
+
+#: accounts/templates/accounts/buy_membership.html:22
+msgid "دیدن پست های ویژه"
+msgstr ""
+
+#: accounts/templates/accounts/buy_membership.html:24
+#: accounts/templates/accounts/buy_membership.html:40
+msgid "پرداخت"
+msgstr ""
+
+#: accounts/templates/accounts/buy_membership.html:31 accounts/views.py:221
+msgid "الماسی"
+msgstr ""
+
+#: accounts/templates/accounts/buy_membership.html:37
+msgid " تمام امکانات بسته طلایی"
+msgstr ""
+
+#: accounts/templates/accounts/buy_membership.html:38
+msgid "فیلتر شمت رایگان"
+msgstr ""
+
+#: accounts/templates/accounts/buy_membership.html:49
+msgid "ثبت"
+msgstr ""
+
+#: accounts/templates/accounts/history.html:8
+msgid "سطح خریداری شده :"
+msgstr ""
+
+#: accounts/templates/accounts/history.html:10
+msgid "خریداری شده در تاریخ :"
+msgstr ""
+
+#: accounts/templates/accounts/history.html:11
+msgid "پایان در تاریخ :"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:11
+#: accounts/templates/accounts/register.html:11 accounts/views.py:51
+msgid "خوش آمدید"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:13
+msgid "نام کاربری و کلمه عبور خود را وارد کنید"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:19
+msgid "ورود"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:28
+msgid "فراموشی رمز عبور ..."
+msgstr ""
+
+#: accounts/templates/accounts/login.html:32
+msgid "حساب کاربری ندارید ؟"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:33
+msgid "ثبت نام کنید"
+msgstr ""
+
+#: accounts/templates/accounts/profile.html:32
+msgid "اطلاعات کاربری"
+msgstr ""
+
+#: accounts/templates/accounts/profile.html:45
+msgid "مدت زمان اشتراک شما تا تاریخ : "
+msgstr ""
+
+#: accounts/templates/accounts/profile.html:59
+msgid "خرید اشتراک ویژه"
+msgstr ""
+
+#: accounts/templates/accounts/profile.html:62
+msgid "اطلاعات آخرین تراکنش"
+msgstr ""
+
+#: accounts/templates/accounts/register.html:13
+msgid "مشخصات زیر را وارد کنید"
+msgstr ""
+
+#: accounts/templates/accounts/register.html:19
+msgid "ثبت نام"
+msgstr ""
+
+#: accounts/templates/accounts/register.html:26
+msgid "حساب کاربری دارید ؟"
+msgstr ""
+
+#: accounts/templates/accounts/register.html:27
+msgid "وارد شوید"
+msgstr ""
+
+#: accounts/views.py:53
+msgid "نام کاربری یا کلمه عبور اشتباه است"
+msgstr ""
+
+#: accounts/views.py:60
+msgid "با موفقیت خارج شدید"
+msgstr ""
+
+#: accounts/views.py:82
+msgid "حساب کاربری شما با موفقیت ایجاد شد !"
+msgstr ""
+
+#: accounts/views.py:156
+msgid "کد منقضی شده"
+msgstr ""
+
+#: accounts/views.py:196
+msgid "شما از قبل اکانت ویژه دارید"
+msgstr ""
+
+#: accounts/views.py:225
+msgid "پرداخت ناموفق"
+msgstr ""
+
+#: home/apps.py:7
+msgid "صفحه اصلی"
+msgstr ""
+
+#: home/forms.py:8
+msgid "به دنبال چه می‌گردید؟"
+msgstr ""
+
+#: home/models.py:15 pages/models.py:17 pages/models.py:39 pages/models.py:61
+#: pages/models.py:83 posts/models.py:23 posts/models.py:78
+msgid "اسلاگ"
+msgstr ""
+
+#: home/models.py:19
+msgid "لینک صفحه"
+msgstr ""
+
+#: home/models.py:27 home/models.py:28
+msgid "منو"
+msgstr ""
+
+#: home/templates/home/inc/pagination.html:5
+#: posts/templates/posts/inc/pagination.html:5
+msgid "اولین صفحه"
+msgstr ""
+
+#: home/templates/home/inc/pagination.html:8
+#: posts/templates/posts/inc/pagination.html:8
+msgid "فبلی"
+msgstr ""
+
+#: home/templates/home/inc/pagination.html:22
+#: posts/templates/posts/inc/pagination.html:22
+msgid "صفحه قعلی"
+msgstr ""
+
+#: home/templates/home/inc/pagination.html:36
+#: posts/templates/posts/inc/pagination.html:36
+msgid "بعدی"
+msgstr ""
+
+#: home/templates/home/inc/pagination.html:39
+#: posts/templates/posts/inc/pagination.html:39
+msgid "آخرین صفحه"
+msgstr ""
+
+#: home/templates/home/index.html:47
+msgid "آخرین مطالب "
+msgstr ""
+
+#: home/templates/home/search.html:7
+msgid "نتایج جستجوی شما برای "
+msgstr ""
+
+#: home/templates/home/search.html:37
+msgid "موردی یافت نشد."
+msgstr ""
+
+#: home/templates/home/search.html:38
+msgid ""
+"با عرض پوزش، اما هیچ چیز مطابق با شرایط جستجوی شما نبود. لطفا با برخی از "
+"کلمات کلیدی مختلف دوباره امتحان کنید."
+msgstr ""
+
+#: home/templates/home/search.html:42 templates/inc/navbar.html:39
+msgid "جستجو"
+msgstr ""
+
+#: pages/apps.py:8
+msgid "صفحه ها"
+msgstr ""
+
+#: pages/models.py:13 pages/models.py:35 pages/models.py:57 pages/models.py:79
+msgid "عنوان صفحه"
+msgstr ""
+
+#: pages/models.py:21 pages/models.py:43 pages/models.py:65 pages/models.py:87
+msgid "محتوای صفحه"
+msgstr ""
+
+#: pages/models.py:25 pages/models.py:26
+msgid "درباره ما"
+msgstr ""
+
+#: pages/models.py:47 pages/models.py:48
+msgid "تماس با ما"
+msgstr ""
+
+#: pages/models.py:69 pages/models.py:70
+msgid "پرسش های متداول"
+msgstr ""
+
+#: pages/models.py:91 pages/models.py:92
+msgid "قوانین"
+msgstr ""
+
+#: pages/templates/admin/change_form.html:19
+msgid "Home"
+msgstr ""
+
+#: pages/templates/admin/change_form.html:24
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: pages/templates/admin/change_form.html:49
+msgid "Please correct the error below."
+msgid_plural ""
+"Please correct the errors\n"
+"                            below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: posts/admin.py:9
+msgid "تایید کردن دیدگاه ها"
+msgstr ""
+
+#: posts/admin.py:14 posts/models.py:89
+msgid "نمایش در کاروسل"
+msgstr ""
+
+#: posts/admin.py:19
+msgid " عدم نمایش در کاروسل"
+msgstr ""
+
+#: posts/admin.py:55
+msgid "عنوان و اسلاگ"
+msgstr ""
+
+#: posts/admin.py:62 posts/models.py:82
+msgid "تصویر پست"
+msgstr ""
+
+#: posts/admin.py:68 posts/models.py:85
+msgid "محتوای پست"
+msgstr ""
+
+#: posts/admin.py:74
+msgid " زمانبندی انتشار"
+msgstr ""
+
+#: posts/admin.py:80
+msgid "تنظیمات سئو"
+msgstr ""
+
+#: posts/admin.py:86
+msgid "تنظیمات نمایش "
+msgstr ""
+
+#: posts/admin.py:108
+msgid "نام و ایمیل"
+msgstr ""
+
+#: posts/admin.py:114 posts/models.py:140
+msgid "نظر"
+msgstr ""
+
+#: posts/admin.py:120
+msgid "تایید کردن"
+msgstr ""
+
+#: posts/admin.py:126
+msgid "ریپلای"
+msgstr ""
+
+#: posts/apps.py:8 posts/models.py:109
+msgid "پست ها"
+msgstr ""
+
+#: posts/form.py:14 posts/form.py:39
+msgid "نظر خود را بنویسید"
+msgstr ""
+
+#: posts/form.py:21 posts/form.py:46
+msgid "مثال : مهران میرزائي"
+msgstr ""
+
+#: posts/form.py:25 posts/form.py:50
+msgid "مثال : mehranmirzaeiv@gmail.com"
+msgstr ""
+
+#: posts/models.py:27
+msgid "زیر مجموعه"
+msgstr ""
+
+#: posts/models.py:41 posts/models.py:64
+msgid "دسته بندی"
+msgstr ""
+
+#: posts/models.py:42
+msgid "دسته بندی ها"
+msgstr ""
+
+#: posts/models.py:59
+msgid "کاریر"
+msgstr ""
+
+#: posts/models.py:69 utils.py:33
+msgid "عنوان"
+msgstr ""
+
+#: posts/models.py:73 utils.py:38
+msgid "توضیح کوتاه پست"
+msgstr ""
+
+#: posts/models.py:93
+msgid "نمایش پست"
+msgstr ""
+
+#: posts/models.py:96
+msgid "زمان انتشار"
+msgstr ""
+
+#: posts/models.py:108
+msgid "پست"
+msgstr ""
+
+#: posts/models.py:151
+msgid "تایید شده"
+msgstr ""
+
+#: posts/models.py:159
+msgid "دیدگاه"
+msgstr ""
+
+#: posts/models.py:160
+msgid " دیدگاه ها"
+msgstr ""
+
+#: posts/templates/posts/category.html:5
+msgid "آخرین مطالب دسته:"
+msgstr ""
+
+#: posts/templates/posts/detail.html:16
+msgid "صفحه اصلی "
+msgstr ""
+
+#: posts/templates/posts/detail.html:36 posts/templates/posts/detail.html:131
+msgid "ذخیره شده"
+msgstr ""
+
+#: posts/templates/posts/detail.html:45 posts/templates/posts/detail.html:50
+#: posts/templates/posts/detail.html:134
+msgid "ذخیره کردن"
+msgstr ""
+
+#: posts/templates/posts/detail.html:66
+msgid "نویسنده :"
+msgstr ""
+
+#: posts/templates/posts/detail.html:91
+msgid "آخرین مطالب این دسته"
+msgstr ""
+
+#: posts/templates/posts/inc/comments.html:3
+msgid "دیدگاه ها"
+msgstr ""
+
+#: posts/templates/posts/inc/comments.html:8
+msgid "نام *"
+msgstr ""
+
+#: posts/templates/posts/inc/comments.html:12
+msgid "ایمیل *"
+msgstr ""
+
+#: posts/templates/posts/inc/comments.html:16
+msgid "نظر *"
+msgstr ""
+
+#: posts/templates/posts/inc/comments.html:19
+msgid "ارسال‌دیدگاه"
+msgstr ""
+
+#: posts/templates/posts/inc/comments.html:95
+msgid "ارسال دید‌گاه"
+msgstr ""
+
+#: posts/views.py:64 posts/views.py:80
+msgid "نظر شما ثبت و پس از تایید به کاربران نمایش داده میشود"
+msgstr ""
+
+#: templates/base.html:10 templates/inc/navbar.html:6
+msgid "پروژه وبلاگ"
+msgstr ""
+
+#: templates/inc/footer.html:3
+msgid "پروژه وبلاگ ساخته شده با"
+msgstr ""
+
+#: templates/inc/footer.html:3
+msgid "بوت استرپ"
+msgstr ""
+
+#: templates/inc/footer.html:3
+msgid "و"
+msgstr ""
+
+#: templates/inc/footer.html:4
+msgid "جنگو"
+msgstr ""
+
+#: templates/inc/footer.html:7
+msgid "برگشتن به بالا"
+msgstr ""
+
+#: templates/inc/navbar.html:12
+msgid "< دسته بندی مطالب"
+msgstr ""
+
+#: utils.py:43
+msgid "کلمات کلیدی"
+msgstr ""
+
+#: utils.py:44
+msgid "بازی  - بازی اندروید  - برنامه اندروید - نقد و بررسی - فیم و سریال"
+msgstr ""

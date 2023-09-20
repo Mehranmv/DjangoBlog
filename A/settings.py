@@ -2,6 +2,7 @@ from pathlib import Path
 import locale
 import os
 import psycopg2
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -119,6 +120,11 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'fa'
 
 TIME_ZONE = 'Asia/Tehran'
+
+LANGUAGES = (
+    ('fa', _('Farsi')),
+    ('en', _('English')),
+)
 
 USE_I18N = True
 

@@ -131,23 +131,29 @@ class VipView(LoginRequiredMixin, View):
         if form.is_valid():
             code = form.cleaned_data['code']
             coupon = Coupon.objects.get(code=code)
-            if coupon.discount_percentage:
-                a1 = x * coupon.discount_percentage / 100
-                a2 = x2 * coupon.discount_percentage / 100
-                if coupon.discount_percentage == 100:
-                    a1 = 0
-                    a2 = 0
-                if coupon.tantamount is not None and a1 > coupon.tantamount:
-                    a1 = x - coupon.tantamount
-                if coupon.tantamount is not None and a2 > coupon.tantamount:
-                    a2 = x2 - coupon.tantamount
-                x -= a1
-                x2 -= a2
-            elif coupon.discount_amount:
-                x -= coupon.discount_amount
-                x2 -= coupon.discount_amount
+            if coupon.use_limit and coupon.use_limit > 0:
+                coupon.use_limit -= 1
+                coupon.save()
+            if coupon.use_limit != 0:
+                if coupon.discount_percentage:
+                    a1 = x * coupon.discount_percentage / 100
+                    a2 = x2 * coupon.discount_percentage / 100
+                    if coupon.discount_percentage == 100:
+                        a1 = 0
+                        a2 = 0
+                    if coupon.tantamount is not None and a1 > coupon.tantamount:
+                        a1 = coupon.tantamount
+                    if coupon.tantamount is not None and a2 > coupon.tantamount:
+                        a2 = coupon.tantamount
+                    x -= a1
+                    x2 -= a2
+                elif coupon.discount_amount:
+                    x -= coupon.discount_amount
+                    x2 -= coupon.discount_amount
+                else:
+                    pass
             else:
-                pass
+                messages.error(request, _("کد منقضی شده"), 'danger')
             context = {
                 'coupon': CouponForm,
                 'amount': x,
@@ -160,30 +166,35 @@ class VipView(LoginRequiredMixin, View):
 
 class BuyMembershipView(View):
     def get(self, request, id):
-        global amount, amount2
-        x = amount
-        if id == 1:
+        membership = Membership.objects.filter(user=request.user)
+        if not membership:
+            global amount, amount2
             x = amount
-        elif id == 2:
-            x = amount2
-        data = {
-            "MerchantID": settings.MERCHANT,
-            "Amount": x,
-            "Description": description,
-            "CallbackURL": CallbackURL,
-        }
-        data = json.dumps(data)
-        headers = {'content-type': 'application/json', 'content-length': str(len(data))}
-        response = requests.post(url=ZP_API_REQUEST, data=data, headers=headers)
-        if response.status_code == 200:
-            response = response.json()
-            if response['Status'] == 100:
-                url = f"{ZP_API_STARTPAY}{response['Authority']}"
-                return redirect(url)
+            if id == 1:
+                x = amount
+            elif id == 2:
+                x = amount2
+            data = {
+                "MerchantID": settings.MERCHANT,
+                "Amount": x,
+                "Description": description,
+                "CallbackURL": CallbackURL,
+            }
+            data = json.dumps(data)
+            headers = {'content-type': 'application/json', 'content-length': str(len(data))}
+            response = requests.post(url=ZP_API_REQUEST, data=data, headers=headers)
+            if response.status_code == 200:
+                response = response.json()
+                if response['Status'] == 100:
+                    url = f"{ZP_API_STARTPAY}{response['Authority']}"
+                    return redirect(url)
 
+            else:
+                print(response.json()['errors'])
+                return HttpResponse(str(response.json()['errors']))
         else:
-            print(response.json()['errors'])
-            return HttpResponse(str(response.json()['errors']))
+            messages.error(request, _("شما از قبل اکانت ویژه دارید"), 'danger')
+            return redirect('accounts:vip')
 
 
 class PaymentCallbackView(View):
@@ -217,6 +228,10 @@ class PaymentCallbackView(View):
 class HistoryView(LoginRequiredMixin, View):
     def get(self, request):
         membership = Membership.objects.filter(user=request.user)
-        if membership.last().end_date < datetime.date.today():
-            membership.delete()
-        return render(request, 'accounts/history.html', {'membership': membership})
+        if membership:
+            if membership.last().end_date < datetime.date.today():
+                membership.delete()
+            return render(request, 'accounts/history.html', {'membership': membership})
+        else:
+            messages.error(request, 'شما اکانت ویژه نداربد', 'danger')
+            return redirect('accounts:user_profile')
