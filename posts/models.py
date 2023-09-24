@@ -44,8 +44,9 @@ class Category(MPTTModel, DT):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('posts:category', args=[self.slug])
+
+def get_absolute_url(self):
+    return reverse('posts:category', args=[self.slug])
 
 
 class Post(DT, SEO):
@@ -102,6 +103,7 @@ class Post(DT, SEO):
         choices=STATUS_CHOICES,
         default='published'
     )
+
     objects = PostManager()
 
     class Meta:
@@ -115,9 +117,10 @@ class Post(DT, SEO):
     def get_absolute_url(self):
         return reverse('posts:post_detail', args=[self.slug])
 
-    def average_rating(self):
-        ratings = Rating.objects.filter(object_id=self.id, content_type__model='post')
-        return ratings.aggregate(models.Avg('rating'))['rating__avg']
+
+def average_rating(self):
+    ratings = Rating.objects.filter(object_id=self.id, content_type__model='post')
+    return ratings.aggregate(models.Avg('rating'))['rating__avg']
 
 
 class Comment(MPTTModel, DT):
@@ -183,3 +186,5 @@ class Like(DT):
 
     def __str__(self):
         return {self.comment}
+
+

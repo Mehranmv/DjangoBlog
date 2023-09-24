@@ -1,8 +1,10 @@
 from pathlib import Path
 import locale
 import os
+import dj_database_url
 import psycopg2
 from django.utils.translation import gettext_lazy as _
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,9 +43,10 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'jalali_date',
     'mathfilters',
+    # 'modeltranslation',
     # local apps
-    'home.apps.HomeConfig',
     'posts.apps.PostsConfig',
+    'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig'
 
@@ -52,8 +55,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -114,23 +117,24 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+DJANGO_SETTINGS_MODULE = 'A.settings'
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en'
 
-TIME_ZONE = 'Asia/Tehran'
+LANGUAGE_CODE = 'fa'
 
 LANGUAGES = (
-    ('fa', _('Farsi')),
     ('en', _('English')),
+    ('fa', _('Farsi')),
 )
+
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale/'),)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -166,10 +170,10 @@ CKEDITOR_CONFIGS = {
 SITE_ID = 1
 
 # to have to settings
-# export ENVIRONMENT=local
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'local')
 if ENVIRONMENT == 'local':
-    from .local_settings import *
+    # from .local_settings import *
+    pass
 elif ENVIRONMENT == 'deploy':
     from .delpoy_settings import *
 else:
@@ -187,3 +191,16 @@ template_name = "star_ratings/widget.html"
 # zarinpal
 MERCHANT = "00000000-0000-0000-0000-000000000000"
 SANDBOX = True
+
+# multy language in modules
+# PARLER_LANGUAGES = {
+#     None: (
+#         {'code': 'fa', },
+#         {'code': 'en', },
+#     ),
+#     'default': {
+#         'fallback': 'fa',
+#         'hide_untranslated': False,
+#     }
+# }
+

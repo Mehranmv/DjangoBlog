@@ -51,12 +51,19 @@
 
                                     </div>
                                     <hr class="mt-0 mb-4">
-                                    <div class=" mb-3 text-center">
-                                        <a class="d-block btn btn-light" href="{% url "accounts:user_bookmark" %}">{% trans 'پست های ذخیره شده' %}</a>
+                                    <div class="row pt-1 text-center">
+                                        <div class="col-6 mb-3">
+                                            <a class="d-block btn btn-light"
+                                               href="{% url "accounts:user_bookmark" %}">{% trans 'پست های ذخیره شده' %}</a>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <a class="d-block btn btn-danger"
+                                               href="{% url "accounts:user_logout" %}">{% trans 'خروج از حساب کاربری' %}</a>
+                                        </div>
                                     </div>
                                     <div class="row pt-1 text-center">
                                         <div class="col-6 mb-3">
-                                            <a class="btn btn-info" href="{% url 'accounts:vip' %}">{% trans 'خرید اشتراک ویژه' %}</a>
+                                            <a class="btn btn-info" href="{% url 'accounts:vip' %}">{% trans 'خرید اشتراک ویژه از سایت' %}</a>
                                         </div>
                                         <div class=" col-6 mb-3">
                                             <a href="{% url 'accounts:history' %}" class="btn btn-warning">{% trans 'اطلاعات آخرین تراکنش' %}</a>

@@ -37,6 +37,10 @@ class Coupon(DT):
         verbose_name=_("تعداد استفاده")
     )
 
+    class Meta:
+        verbose_name = _("کد تخفیف")
+        verbose_name_plural = _("کد تخفیف")
+
     def __str__(self):
         return f"{self.code}"
 
@@ -59,6 +63,10 @@ class Membership(models.Model):
         blank=True,
         null=True
     )
+
+    class Meta:
+        verbose_name = _("حساب ویژه")
+        verbose_name_plural = _("حساب ویژه")
 
     def __str__(self):
         return self.user.username

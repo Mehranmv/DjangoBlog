@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Category, Post, Comment, Bookmark
 from mptt.admin import MPTTModelAdmin
 from django.utils.translation import gettext_lazy as _
+from modeltranslation.admin import TranslationAdmin
 
 admin.site.register(Bookmark)
 

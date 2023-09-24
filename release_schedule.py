@@ -1,7 +1,7 @@
 import os
 import django
-django.setup()
 from django.utils import timezone
+django.setup()
 from posts.models import Post
 
 

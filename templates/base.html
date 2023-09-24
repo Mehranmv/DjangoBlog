@@ -1,7 +1,9 @@
 {% load i18n %}
-{% load static%}
+{% load static %}
+{% get_current_language as LANGUAGE_BIDI %}
 <!doctype html>
-<html lang="fa" dir="rtl" data-bs-theme="dark">
+<html lang="{% if LANGUAGE_BIDI == 'fa' %} fa {% else %} en {% endif %}" dir="{% if LANGUAGE_BIDI == 'fa' %}rtl{% else %}ltr{% endif %}"
+      data-bs-theme="dark">
 <head>
     <meta charset="utf-8">
     {% block meta %}

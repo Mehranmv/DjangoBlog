@@ -15,7 +15,7 @@
                         {% recursetree categories %}
                             {% if not node.is_leaf_node %}
                                 <li {% if node.is_leaf_node %}class="dropdown-submenu dropend"{% endif %} style="text-align: right">
-                                    <a class="dropdown-item" href="{{ node.get_absolute_url }}"> << {{ node.name }}</a>
+                                    <a class="dropdown-item" href=""> << {{ node.name }}</a>
                                     {% if not node.is_leaf_node %}
                                         <ul class="dropdown-menu dropdown-submenu">
                                             <li>
