@@ -48,7 +48,7 @@ class Coupon(DT):
 class Membership(models.Model):
     user = models.OneToOneField(
         User,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
     start_date = models.DateField(
         auto_now_add=True

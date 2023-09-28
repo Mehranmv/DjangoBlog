@@ -1,10 +1,10 @@
+# django imports
 from django.contrib import admin
-from .models import Category, Post, Comment, Bookmark
-from mptt.admin import MPTTModelAdmin
 from django.utils.translation import gettext_lazy as _
-from modeltranslation.admin import TranslationAdmin
-
-admin.site.register(Bookmark)
+# locale imports
+from .models import Category, Post, Comment, Bookmark
+# third party imports
+from mptt.admin import MPTTModelAdmin
 
 
 @admin.action(description=_("تایید کردن دیدگاه ها"))
@@ -86,7 +86,7 @@ class PostAdmin(admin.ModelAdmin):
         (
             _("تنظیمات نمایش "),
             {
-                "fields": ["is_carousel_item", "display_post"],
+                "fields": ["is_carousel_item", "display_post", "is_membership_item"],
             }
         )
     ]

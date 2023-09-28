@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
+from parler.models import TranslatableModel, TranslatedFields
 # local imports
 from .managers import CommentManager, PostManager
 # Third party packages import
@@ -44,15 +45,15 @@ class Category(MPTTModel, DT):
     def __str__(self):
         return self.name
 
-
-def get_absolute_url(self):
-    return reverse('posts:category', args=[self.slug])
+    def get_absolute_url(self):
+        return reverse('posts:category', args=[self.slug])
 
 
 class Post(DT, SEO):
+    PUBLISHED = 'Published'
     STATUS_CHOICES = (
         ('scheduled', 'Scheduled'),
-        ('published', 'Published'),
+        (PUBLISHED, 'Published'),
     )
     user = models.ForeignKey(
         User,
@@ -92,6 +93,10 @@ class Post(DT, SEO):
     display_post = models.BooleanField(
         default=True,
         verbose_name=_("نمایش پست")
+    )
+    is_membership_item = models.BooleanField(
+        default=False,
+        verbose_name=_("برای اکانت های ویژه")
     )
     publish_date = models.DateTimeField(
         verbose_name=_("زمان انتشار"),
@@ -186,5 +191,3 @@ class Like(DT):
 
     def __str__(self):
         return {self.comment}
-
-

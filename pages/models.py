@@ -28,6 +28,13 @@ class AboutUs(DT):
     def __str__(self):
         return self.title
 
+    @classmethod
+    def create_or_get_default(cls):
+        record = cls.objects.last()
+        if record:
+            return record
+        return cls.objects.create(title='درباره ما',slug='aboutus',description='تست')
+
 
 class ContactUs(DT):
     title = models.CharField(

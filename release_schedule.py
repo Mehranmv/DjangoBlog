@@ -15,7 +15,7 @@ def publish_scheduled_posts():
 
     scheduled_posts = Post.objects.filter(publish_date__lte=timezone.now(), status='scheduled')
     for post in scheduled_posts:
-        post.status = 'published'
+        post.status = Post.PUBLISHED
         post.save()
 
 

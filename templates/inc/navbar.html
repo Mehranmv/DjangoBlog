@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load mptt_tags %}
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home:home_page' %}">{% trans 'پروژه وبلاگ' %}</a>
@@ -15,11 +14,11 @@
                         {% recursetree categories %}
                             {% if not node.is_leaf_node %}
                                 <li {% if node.is_leaf_node %}class="dropdown-submenu dropend"{% endif %} style="text-align: right">
-                                    <a class="dropdown-item" href=""> << {{ node.name }}</a>
+                                    <a class="dropdown-item" href="{{ node.get_absolute_url }}"> << {{ node.name }}</a>
                                     {% if not node.is_leaf_node %}
                                         <ul class="dropdown-menu dropdown-submenu">
                                             <li>
-                                                <a class="dropdown-item" href="#">{{ children }}</a>
+                                                <a class="dropdown-item" href="{{ node.get_absolute_url }}">{{ children }}</a>
                                             </li>
                                         </ul>
                                     {% endif %}
@@ -33,12 +32,11 @@
                     </ul>
                 </li>
             </ul>
-                <form class="d-flex" method="get" action="{% url 'home:search' %}">
-                    {{ search.as_p }}
-                    <input style="height: 38px;margin-top: 15px;margin-right: 5px" class="btn btn-outline-success" type="submit"
-                           value="{% trans 'جستجو' %}">
-                </form>
+            <form class="d-flex" method="get" action="{% url 'home:search' %}">
+                {{ search.as_p }}
+                <input style="height: 38px;margin-top: 15px;margin-right: 5px" class="btn btn-outline-success" type="submit"
+                       value="{% trans 'جستجو' %}">
+            </form>
         </div>
     </div>
 </nav>
-

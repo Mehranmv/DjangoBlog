@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n  jformat mptt_tags %}
 {% block content %}
+    {% get_current_language as LANGUAGE_BIDI %}
     <div class="row ">
         <div class="col-12 ">
             <div class="bg-secondary rounded-3 p-2 mb-1"
@@ -57,7 +58,9 @@
                                     </a>
                                     <p class="mb-auto">{{ posts.description }} </p>
                                     <div class="mb-2 text-body-secondary">
-                                        <p style="display: inline"><i class="fas fa-clock fa-xs"></i> {{ posts.updated_jalali | jformat:"%d %b %Y" }}
+                                        <p style="display: inline"><i class="fas fa-clock fa-xs"></i>
+                                            {% if LANGUAGE_BIDI == 'fa' %} {{ posts.updated_jalali | jformat:"%d %b %Y" }} {% else %}
+                                                {{ posts.updated | date:'d b Y' }} {% endif %}
                                         </p>
                                         <a href="{{ posts.category.get_absolute_url }}"
                                            class="text-primary"> <i class="fas fa-folder fa-xs"></i> {{ posts.category }}</a>

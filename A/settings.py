@@ -125,8 +125,8 @@ DJANGO_SETTINGS_MODULE = 'A.settings'
 LANGUAGE_CODE = 'fa'
 
 LANGUAGES = (
-    ('en', _('English')),
     ('fa', _('Farsi')),
+    ('en', _('English')),
 )
 
 TIME_ZONE = 'Asia/Tehran'
@@ -191,16 +191,4 @@ template_name = "star_ratings/widget.html"
 # zarinpal
 MERCHANT = "00000000-0000-0000-0000-000000000000"
 SANDBOX = True
-
-# multy language in modules
-# PARLER_LANGUAGES = {
-#     None: (
-#         {'code': 'fa', },
-#         {'code': 'en', },
-#     ),
-#     'default': {
-#         'fallback': 'fa',
-#         'hide_untranslated': False,
-#     }
-# }
 

@@ -210,10 +210,12 @@ class PaymentCallbackView(View):
         )
         headers = {'content-type': 'application/json', 'content-length': str(len(data))}
         response = requests.post(ZP_API_VERIFY, data=data, headers=headers)
+
         if response.status_code == 200:
             res = response.json()
             if res['Status'] == 100:
-                return HttpResponse('موفق')
+                return render(request, 'accounts/buy_membership_ok.html')
+                pass
             else:
                 if amount == 10000:
                     plan = _("طلایی")
@@ -221,8 +223,8 @@ class PaymentCallbackView(View):
                     plan = _("الماسی")
                 Membership.objects.create(user=request.user, start_date=datetime.date.today(),
                                           end_date=datetime.date.today() + relativedelta(months=1), plan_type=plan)
-                return HttpResponse('موفق')
-        return HttpResponse(_("پرداخت ناموفق"))
+                return render(request, 'accounts/buy_membership_ok.html')
+        return render(request, 'accounts/buy_membership_nok.html')
 
 
 class HistoryView(LoginRequiredMixin, View):

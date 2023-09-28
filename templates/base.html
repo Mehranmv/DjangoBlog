@@ -58,9 +58,11 @@
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-{% include 'inc/navbar.html' %}
-<div class="jumbotron">
+<header class="fixed-top">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {% include 'inc/navbar.html' %}
+</header>
+<div class="jumbotron" style="margin-top: 100px">
     {% include 'inc/messages.html' %}
     <main class="container">
 

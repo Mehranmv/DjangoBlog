@@ -7,7 +7,7 @@ from .models import AboutUs, ContactUs, Rules, Questions
 
 class AboutUsView(View):
     def get(self, request):
-        page = AboutUs.objects.get(slug='aboutus')
+        page = AboutUs.create_or_get_default()
         return render(request, 'pages/pages.html', {'page': page})
 
 

@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
 # local imports
 from .models import Category, Post, Comment, Bookmark, Like
+from accounts.models import Membership
 from .form import CommentForm, ReplyCommentForm
 import utils
 
@@ -30,7 +31,8 @@ class PostDetailView(View):
     form_class_reply = ReplyCommentForm
 
     def get(self, request, post_slug):
-        post = get_object_or_404(Post, slug=post_slug, )
+        post = get_object_or_404(Post, slug=post_slug)
+        membership = Membership.objects.filter(user=request.user)
         ancestors = post.category.get_ancestors(include_self=True)
         form = self.form_class()
         comments = Comment.objects.accepted(post)
@@ -43,6 +45,12 @@ class PostDetailView(View):
                 is_bookmarked = True
             except Bookmark.DoesNotExist:
                 is_bookmarked = False
+        if post.is_membership_item and membership:
+            pass
+        else:
+            messages.error(request, _("برای نمایش این پست باید اکانت ویژه تهیه کنید !"), 'danger')
+            return redirect('accounts:user_profile')
+
         context = {
             "post": post,
             'form': form,
