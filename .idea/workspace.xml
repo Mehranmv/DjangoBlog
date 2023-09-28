@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0b45231d-0f44-4b90-9714-1aa3840dedfd" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="package.json" />
+        <option value="CSS File" />
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2TyemegCfSdeVAibb2a7vSBBITY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/fatemeh/Project/blog/A/accounts&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/accounts" />
+      <recent name="$PROJECT_DIR$/static/fonts" />
+      <recent name="$PROJECT_DIR$/posts/templates/posts" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/home/templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/accounts/templates/accounts" />
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/home/templates/home" />
+      <recent name="$PROJECT_DIR$/posts" />
+      <recent name="$PROJECT_DIR$/A/templatetags" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Django Server.A">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/A/home/templates/home/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="A" type="Python.DjangoServer" factoryName="Django server">
+      <module name="A" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0b45231d-0f44-4b90-9714-1aa3840dedfd" name="Changes" comment="" />
+      <created>1692019908062</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1692019908062</updated>
+      <workItem from="1692019909100" duration="8912000" />
+      <workItem from="1692039415055" duration="4131000" />
+      <workItem from="1692079399661" duration="8099000" />
+      <workItem from="1692094104658" duration="14148000" />
+      <workItem from="1692168416472" duration="8920000" />
+      <workItem from="1692420431311" duration="555000" />
+      <workItem from="1692420994848" duration="30905000" />
+      <workItem from="1692461888688" duration="7150000" />
+      <workItem from="1692507439180" duration="8641000" />
+      <workItem from="1692523724712" duration="663000" />
+      <workItem from="1692546131801" duration="5285000" />
+      <workItem from="1692553964709" duration="1259000" />
+      <workItem from="1692594381634" duration="8635000" />
+      <workItem from="1692611661907" duration="4190000" />
+      <workItem from="1692620880012" duration="15699000" />
+      <workItem from="1692683182001" duration="5417000" />
+      <workItem from="1692697751758" duration="3879000" />
+      <workItem from="1692709562277" duration="7332000" />
+      <workItem from="1692723700749" duration="1722000" />
+      <workItem from="1692769237642" duration="4265000" />
+      <workItem from="1692777966737" duration="6035000" />
+      <workItem from="1692799137138" duration="3156000" />
+      <workItem from="1692802831814" duration="2676000" />
+      <workItem from="1692858640352" duration="2132000" />
+      <workItem from="1692870958271" duration="5070000" />
+      <workItem from="1692877710410" duration="5757000" />
+      <workItem from="1693041999386" duration="3237000" />
+      <workItem from="1693053839517" duration="1284000" />
+      <workItem from="1693055477758" duration="233000" />
+      <workItem from="1693056073911" duration="1146000" />
+      <workItem from="1693132189388" duration="301000" />
+      <workItem from="1693238041899" duration="1667000" />
+      <workItem from="1693303199471" duration="1623000" />
+      <workItem from="1693373925828" duration="2859000" />
+      <workItem from="1693377141150" duration="70000" />
+      <workItem from="1693384793623" duration="2249000" />
+      <workItem from="1693475697308" duration="3187000" />
+      <workItem from="1693758017787" duration="670000" />
+      <workItem from="1693762340731" duration="3504000" />
+      <workItem from="1693804563741" duration="3590000" />
+      <workItem from="1693808734691" duration="3903000" />
+      <workItem from="1693817974265" duration="3354000" />
+      <workItem from="1693827081077" duration="338000" />
+      <workItem from="1693831668088" duration="5869000" />
+      <workItem from="1693844876161" duration="4472000" />
+      <workItem from="1693849764053" duration="1761000" />
+      <workItem from="1693892054640" duration="12299000" />
+      <workItem from="1693914303418" duration="6286000" />
+      <workItem from="1693937484180" duration="792000" />
+      <workItem from="1693979085068" duration="3897000" />
+      <workItem from="1693996457959" duration="5181000" />
+      <workItem from="1694010651694" duration="2570000" />
+      <workItem from="1694067427262" duration="1459000" />
+      <workItem from="1694068894886" duration="3916000" />
+      <workItem from="1694110447890" duration="2112000" />
+      <workItem from="1694839323974" duration="10874000" />
+      <workItem from="1694933103814" duration="115000" />
+      <workItem from="1694942364671" duration="6892000" />
+      <workItem from="1694954548911" duration="5882000" />
+      <workItem from="1695013037625" duration="630000" />
+      <workItem from="1695015476551" duration="5862000" />
+      <workItem from="1695029516383" duration="4692000" />
+      <workItem from="1695038889583" duration="6817000" />
+      <workItem from="1695055218141" duration="5961000" />
+      <workItem from="1695102766317" duration="5307000" />
+      <workItem from="1695115665996" duration="3420000" />
+      <workItem from="1695124091271" duration="27000" />
+      <workItem from="1695128530090" duration="229000" />
+      <workItem from="1695128766592" duration="8253000" />
+      <workItem from="1695185322205" duration="6894000" />
+      <workItem from="1695201839124" duration="2414000" />
+      <workItem from="1695215191004" duration="5917000" />
+      <workItem from="1695285513712" duration="3706000" />
+      <workItem from="1695289266099" duration="41000" />
+      <workItem from="1695292132367" duration="5000" />
+      <workItem from="1695293179812" duration="3663000" />
+      <workItem from="1695313872069" duration="4000" />
+      <workItem from="1695388170889" duration="3000" />
+      <workItem from="1695463662250" duration="5953000" />
+      <workItem from="1695472264963" duration="4000" />
+      <workItem from="1695473612492" duration="1111000" />
+      <workItem from="1695479736054" duration="572000" />
+      <workItem from="1695480753624" duration="1319000" />
+      <workItem from="1695535857628" duration="4277000" />
+      <workItem from="1695545071810" duration="3692000" />
+      <workItem from="1695552334891" duration="1650000" />
+      <workItem from="1695718276356" duration="1514000" />
+      <workItem from="1695720202987" duration="1413000" />
+      <workItem from="1695736303512" duration="379000" />
+      <workItem from="1695812456258" duration="4745000" />
+      <workItem from="1695818218499" duration="58000" />
+      <workItem from="1695916520066" duration="1036000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/A$release_schedule.coverage" NAME="release_schedule Coverage Results" MODIFIED="1695286370676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
