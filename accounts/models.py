@@ -45,7 +45,7 @@ class Coupon(DT):
         return f"{self.code}"
 
 
-class Membership(models.Model):
+class Membership(DT):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,

@@ -22,7 +22,8 @@ class HomePage(View):
             else:
                 carousel_items = sample(list(carousel_posts), 4)
         else:
-            carousel_items = sample(list(posts), 4)
+            carousel_items = sample(list(posts), 1)
+            # carousel_items = carousel_posts
         page_number = request.GET.get('page')
         page = utils.pagination(posts, page_number)
         context = {
@@ -38,11 +39,10 @@ class SearchView(View):
     def get(self, request):
         posts = Post.objects.all()
         search_query = request.GET.get('search')
-        posts = posts.annotate(similarity=TrigramWordSimilarity(search_query, 'title')).filter(similarity__gt=0.3).order_by('-similarity')
+        posts = posts.annotate(similarity=TrigramWordSimilarity(search_query, 'title')).filter(
+            similarity__gt=0.3).order_by('-similarity')
         context = {
             'posts': posts,
             'search_query': search_query
         }
         return render(request, 'home/search.html', context)
-
-

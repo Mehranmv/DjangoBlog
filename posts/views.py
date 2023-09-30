@@ -32,7 +32,6 @@ class PostDetailView(View):
 
     def get(self, request, post_slug):
         post = get_object_or_404(Post, slug=post_slug)
-        membership = Membership.objects.filter(user=request.user)
         ancestors = post.category.get_ancestors(include_self=True)
         form = self.form_class()
         comments = Comment.objects.accepted(post)
@@ -40,16 +39,26 @@ class PostDetailView(View):
         latest_post = latest_post.exclude(id=post.id)[:2]
         is_bookmarked = False
         if request.user.is_authenticated:
+            if Membership.objects.filter(user=request.user).exists():
+                membership = Membership.objects.get(user=request.user)
+            else:
+                membership = None
+            if post.is_membership_item and membership:
+                pass
+            elif not post.is_membership_item:
+                pass
+            else:
+                messages.error(request, _("برای نمایش این پست باید اکانت ویژه تهیه کنید !"), 'danger')
+                return redirect('accounts:user_profile')
             try:
                 Bookmark.objects.get(user=request.user, post=post)
                 is_bookmarked = True
+
             except Bookmark.DoesNotExist:
                 is_bookmarked = False
-        if post.is_membership_item and membership:
-            pass
-        else:
-            messages.error(request, _("برای نمایش این پست باید اکانت ویژه تهیه کنید !"), 'danger')
-            return redirect('accounts:user_profile')
+        elif not request.user.is_authenticated:
+            messages.error(request, 'برای دیدن پست های ویژه باید وارد شوید', 'danger')
+            return redirect('home:home_page')
 
         context = {
             "post": post,

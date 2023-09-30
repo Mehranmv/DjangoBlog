@@ -50,10 +50,9 @@ class Category(MPTTModel, DT):
 
 
 class Post(DT, SEO):
-    PUBLISHED = 'Published'
     STATUS_CHOICES = (
         ('scheduled', 'Scheduled'),
-        (PUBLISHED, 'Published'),
+        ('published', 'Published'),
     )
     user = models.ForeignKey(
         User,
