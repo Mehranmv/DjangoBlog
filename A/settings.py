@@ -3,11 +3,13 @@ import locale
 import os
 import dj_database_url
 import psycopg2
+from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
 
+load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-uowdv@byvk7fyacx5f+x*8@940$m0awt6v%9$mdpv^#t^&bp4u'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = True
 
@@ -36,7 +38,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'jalali_date',
     'mathfilters',
-    # 'modeltranslation',
+    'modeltranslation',
     # local apps
     'posts.apps.PostsConfig',
     'home.apps.HomeConfig',
@@ -82,9 +84,9 @@ WSGI_APPLICATION = 'A.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blog',
-        'USER': 'mehran',
-        'PASSWORD': 'mehran',
+        'NAME': os.environ.get("DATABASE_NAME"),
+        'USER': os.environ.get("DATABASE_USER"),
+        'PASSWORD': os.environ.get("DATABASE_PASSWORD"),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -167,5 +169,16 @@ STAR_RATINGS_STAR_WIDTH = 24
 template_name = "star_ratings/widget.html"
 
 # zarinpal
-MERCHANT = "00000000-0000-0000-0000-000000000000"
+MERCHANT = os.environ.get("MERCHANT")
 SANDBOX = True
+
+# Use the default language as the fallback language
+MODELTRANSLATION_FALLBACK_LANGUAGES = (LANGUAGE_CODE,)
+
+# Use the default language as the base language for translations
+MODELTRANSLATION_DEFAULT_LANGUAGE = LANGUAGE_CODE
+
+# Enable translation for all models
+MODELTRANSLATION_TRANSLATION_FILES = (
+    'posts.translation',  # replace with your app name
+)

@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -125,35 +125,12 @@ class VipView(LoginRequiredMixin, View):
         global amount, amount2
         amount = 10000
         amount2 = 20000
-        x = amount
-        x2 = amount2
         form = CouponForm(request.POST)
         if form.is_valid():
             code = form.cleaned_data['code']
-            coupon = Coupon.objects.get(code=code)
-            if coupon.use_limit and coupon.use_limit > 0:
-                coupon.use_limit -= 1
-                coupon.save()
-            if coupon.use_limit != 0:
-                if coupon.discount_percentage:
-                    a1 = x * coupon.discount_percentage / 100
-                    a2 = x2 * coupon.discount_percentage / 100
-                    if coupon.discount_percentage == 100:
-                        a1 = 0
-                        a2 = 0
-                    if coupon.tantamount is not None and a1 > coupon.tantamount:
-                        a1 = coupon.tantamount
-                    if coupon.tantamount is not None and a2 > coupon.tantamount:
-                        a2 = coupon.tantamount
-                    x -= a1
-                    x2 -= a2
-                elif coupon.discount_amount:
-                    x -= coupon.discount_amount
-                    x2 -= coupon.discount_amount
-                else:
-                    pass
-            else:
-                messages.error(request, _("کد منقضی شده"), 'danger')
+            amounts = Coupon.discount(code=code)
+            x = amounts[0]
+            x2 = amounts[1]
             context = {
                 'coupon': CouponForm,
                 'amount': x,
@@ -165,14 +142,14 @@ class VipView(LoginRequiredMixin, View):
 
 
 class BuyMembershipView(View):
-    def get(self, request, id):
+    def get(self, request, id1):
         membership = Membership.objects.filter(user=request.user)
         if not membership:
             global amount, amount2
             x = amount
-            if id == 1:
+            if id1 == 1:
                 x = amount
-            elif id == 2:
+            elif id1 == 2:
                 x = amount2
             data = {
                 "MerchantID": settings.MERCHANT,
@@ -217,7 +194,7 @@ class PaymentCallbackView(View):
                 return render(request, 'accounts/buy_membership_ok.html')
                 pass
             else:
-                if amount == 10000:
+                if amount <= 10000:
                     plan = _("طلایی")
                 else:
                     plan = _("الماسی")

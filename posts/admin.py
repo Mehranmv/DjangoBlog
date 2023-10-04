@@ -2,24 +2,9 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 # locale imports
-from .models import Category, Post, Comment, Bookmark
+from .models import Category, Post, Comment
 # third party imports
 from mptt.admin import MPTTModelAdmin
-
-
-@admin.action(description=_("تایید کردن دیدگاه ها"))
-def make_accepted(self, request, queryset):
-    queryset.update(is_accepted=True)
-
-
-@admin.action(description=_("نمایش در کاروسل"))
-def enable_in_carousel(self, request, queryset):
-    queryset.update(is_carousel_item=True)
-
-
-@admin.action(description=_(" عدم نمایش در کاروسل"))
-def disable_in_carousel(self, request, queryset):
-    queryset.update(is_carousel_item=False)
 
 
 @admin.register(Category)
@@ -42,7 +27,6 @@ class PostAdmin(admin.ModelAdmin):
         'seo_title': ('title',),
         "seo_description": ('description',)
     }
-    actions = [enable_in_carousel, disable_in_carousel]
     raw_id_fields = ('category', 'user')
     fieldsets = [
         (
@@ -91,13 +75,22 @@ class PostAdmin(admin.ModelAdmin):
         )
     ]
 
+    @admin.action(description=_("نمایش در کاروسل"))
+    def enable_in_carousel(self, request, queryset):
+        queryset.update(is_carousel_item=True)
+
+    @admin.action(description=_(" عدم نمایش در کاروسل"))
+    def disable_in_carousel(self, request, queryset):
+        queryset.update(is_carousel_item=False)
+
+    actions = [enable_in_carousel, disable_in_carousel]
+
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'body'[:40], 'is_accepted')
     list_filter = ('is_accepted',)
     search_fields = ('name', 'body')
-    actions = [make_accepted]
     fieldsets = [
         (
             None,
@@ -130,3 +123,9 @@ class CommentAdmin(admin.ModelAdmin):
             }
         )
     ]
+
+    @admin.action(description=_("تایید کردن دیدگاه ها"))
+    def make_accepted(self, request, queryset):
+        queryset.update(is_accepted=True)
+
+    actions = [make_accepted]

@@ -2,12 +2,12 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 # locale imports
-from utils import DT
+from utils import AbstractDateTime
 # third party imports
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
-class AboutUs(DT):
+class AboutUs(AbstractDateTime):
     title = models.CharField(
         max_length=100,
         verbose_name=_("عنوان صفحه")
@@ -33,10 +33,10 @@ class AboutUs(DT):
         record = cls.objects.last()
         if record:
             return record
-        return cls.objects.create(title='درباره ما',slug='aboutus',description='تست')
+        return cls.objects.create(title='درباره ما', slug='aboutus', description='تست')
 
 
-class ContactUs(DT):
+class ContactUs(AbstractDateTime):
     title = models.CharField(
         max_length=100,
         verbose_name=_("عنوان صفحه")
@@ -57,8 +57,15 @@ class ContactUs(DT):
     def __str__(self):
         return self.title
 
+    @classmethod
+    def create_or_get_default(cls):
+        record = cls.objects.last()
+        if record:
+            return record
+        return cls.objects.create(title='تماس با ما', slug='contactus', description='تماس با ما')
 
-class Questions(DT):
+
+class Questions(AbstractDateTime):
     title = models.CharField(
         max_length=100,
         verbose_name=_("عنوان صفحه")
@@ -79,8 +86,15 @@ class Questions(DT):
     def __str__(self):
         return self.title
 
+    @classmethod
+    def create_or_get_default(cls):
+        record = cls.objects.last()
+        if record:
+            return record
+        return cls.objects.create(title='سوالات متداول', slug='questions', description='سوالات متداول')
 
-class Rules(DT):
+
+class Rules(AbstractDateTime):
     title = models.CharField(
         max_length=100,
         verbose_name=_("عنوان صفحه")
@@ -100,3 +114,10 @@ class Rules(DT):
 
     def __str__(self):
         return self.title
+
+    @classmethod
+    def create_or_get_default(cls):
+        record = cls.objects.last()
+        if record:
+            return record
+        return cls.objects.create(title='قوانین', slug='rules', description='فوانین')

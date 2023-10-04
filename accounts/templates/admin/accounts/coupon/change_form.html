@@ -1,0 +1,18 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+{% block field_sets %}
+    <input style="margin-left: 178px;width: 276px" type="button" onclick="generate_code()"
+           value={% trans "Generate-Code" %}>
+    {% for fieldset in adminform %}
+        {% include "admin/includes/fieldset.html" %}
+    {% endfor %}
+{% endblock %}
+
+{% block extrahead %}
+    <script>
+        function generate_code() {
+            const code_field = document.getElementById("id_code");
+            code_field.value = Math.random().toString(36).substring(2, 10).toUpperCase();
+        }
+    </script>
+{% endblock %}

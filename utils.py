@@ -4,7 +4,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 # third party imports
 from jalali_date import datetime2jalali
-from ckeditor_uploader.fields import RichTextUploadingField
 
 
 def pagination(data, page_number, page_size=10):
@@ -13,7 +12,7 @@ def pagination(data, page_number, page_size=10):
     return page
 
 
-class DT(models.Model):
+class AbstractDateTime(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -28,15 +27,13 @@ class DT(models.Model):
 
 
 class SEO(models.Model):
-    seo_title = models.SlugField(
+    seo_title = models.CharField(
         max_length=255,
         verbose_name=_('عنوان'),
-        allow_unicode=True
     )
-    seo_description = models.SlugField(
+    seo_description = models.CharField(
         max_length=120,
         verbose_name=_('توضیح کوتاه پست'),
-        allow_unicode=True
     )
     seo_keywords = models.CharField(
         max_length=255,

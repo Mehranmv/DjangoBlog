@@ -3,9 +3,17 @@
 {% load jformat %}
 {% load i18n mptt_tags %}
 {% block meta %}
-    <title>{{ post.seo_title }}</title>
+    {% if post.seo_title %}
+        <title>{{ post.seo_title }}</title>
+    {% else %}
+        <title>{{ post.title }}</title>
+    {% endif %}
     <meta name="keywords" content="{{ post.seo_keywords }}">
-    <meta name="description" content="{{ post.seo_description }}">
+    {% if post.seo_title %}
+        <meta name="description" content="{{ post.seo_description }}">
+    {% else %}
+        <meta name="description" content="{{ post.description }}">
+    {% endif %}
 
 {% endblock %}
 {% block content %}
@@ -13,13 +21,16 @@
         <div class="{% if latest_post %} col-md-9 {% endif %} ">
             <div aria-label="breadcrumb" class="p-3 mb-2 bg-secondary rounded-3" style="--bs-bg-opacity: .15;">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'home:home_page' %}">{% trans 'صفحه اصلی ' %} / </a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'home:home_page' %}">{% trans 'صفحه اصلی ' %} / </a>
+                    </li>
                     {% for ancestor in ancestors %}
                         {% if post.category == ancestor %}
-                            <li class="breadcrumb-item "><a href="{{ ancestor.get_absolute_url }}">{{ ancestor.name }}</a></li>
+                            <li class="breadcrumb-item "><a
+                                    href="{{ ancestor.get_absolute_url }}">{{ ancestor.name }}</a></li>
                         {% endif %}
                     {% endfor return JsonResponse({}, status=400) %}
-                    <li><a style="color: #0253c7" href="{% url 'posts:post_detail' post.slug %}">{{ post.title }}</a></li>
+                    <li><a style="color: #0253c7" href="{% url 'posts:post_detail' post.slug %}">{{ post.title }}</a>
+                    </li>
                 </ol>
             </div>
             <br/>
@@ -27,8 +38,10 @@
             <div class="bg-secondary rounded-3 p-5" style="--bs-bg-opacity: .15;">
                 {% if request.user.is_authenticated %}
                     {% if is_bookmarked %}
-                        <button class="bookmark-btn btn btn-primary" data-post-id="{{ post.id }}" data-bookmarked="True">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-fill"
+                        <button class="bookmark-btn btn btn-primary" data-post-id="{{ post.id }}"
+                                data-bookmarked="True">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-bookmark-fill"
                                  viewBox="0 0 16 16">
                                 <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
                             </svg>
@@ -38,7 +51,8 @@
                         </button>
                     {% else %}
                         <button class="bookmark-btn" data-post-id="{{ post.id }}" data-bookmarked="False">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-bookmark"
                                  viewBox="0 0 16 16">
                                 <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
                             </svg>

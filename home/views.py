@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib.postgres.search import TrigramWordSimilarity
 # local imports
-from posts.models import Post
+from posts.models import Post, StatusChoices
 from .models import MenuItem
 import utils
 # python imports
@@ -13,8 +13,8 @@ from random import sample
 class HomePage(View):
 
     def get(self, request):
-        posts = Post.objects.filter(display_post=True, status='published')
-        carousel_posts = posts.filter(is_carousel_item=True, status='published')
+        posts = Post.objects.filter(display_post=True, status=StatusChoices.PUBLISHED.value)
+        carousel_posts = posts.filter(is_carousel_item=True, status=StatusChoices.PUBLISHED.value)
         menu_items = MenuItem.objects.all()
         if carousel_posts.exists():
             if carousel_posts.count() < 4:
@@ -22,8 +22,7 @@ class HomePage(View):
             else:
                 carousel_items = sample(list(carousel_posts), 4)
         else:
-            carousel_items = sample(list(posts), 1)
-            # carousel_items = carousel_posts
+            carousel_items = sample(list(posts), 4)
         page_number = request.GET.get('page')
         page = utils.pagination(posts, page_number)
         context = {

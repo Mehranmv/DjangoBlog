@@ -70,4 +70,5 @@ class UserRegisterForm(forms.Form):
 
 
 class CouponForm(forms.Form):
-    code = forms.CharField(label=_("کد تخفیف دارید ؟ وارد کنید"), widget=forms.TextInput(attrs={'class': 'form form-control'}))
+    code = forms.CharField(label=_("کد تخفیف دارید ؟ وارد کنید"),
+                           widget=forms.TextInput(attrs={'class': 'form form-control'}))

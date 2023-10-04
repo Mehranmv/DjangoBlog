@@ -13,17 +13,17 @@ class AboutUsView(View):
 
 class ContactUsView(View):
     def get(self, request):
-        page = ContactUs.objects.get(slug='contactus')
+        page = ContactUs.objects.create_or_get_default()
         return render(request, 'pages/pages.html', {'page': page})
 
 
 class RulesView(View):
     def get(self, request):
-        page = Rules.objects.get(slug='rules')
+        page = Rules.objects.create_or_get_default()
         return render(request, 'pages/pages.html', {'page': page})
 
 
 class QuestionsView(View):
     def get(self, request):
-        page = Questions.objects.get(slug='questions')
+        page = Questions.objects.create_or_get_default()
         return render(request, 'pages/pages.html', {'page': page})

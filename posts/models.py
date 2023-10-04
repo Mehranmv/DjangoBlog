@@ -3,17 +3,17 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
-from parler.models import TranslatableModel, TranslatedFields
 # local imports
 from .managers import CommentManager, PostManager
 # Third party packages import
 from mptt.models import MPTTModel, TreeForeignKey
 from ckeditor_uploader.fields import RichTextUploadingField
-from utils import DT, SEO
+from utils import AbstractDateTime, SEO
 from star_ratings.models import Rating
+from enum import Enum
 
 
-class Category(MPTTModel, DT):
+class Category(MPTTModel, AbstractDateTime):
     name = models.CharField(
         max_length=50,
         verbose_name=_("نام")
@@ -49,11 +49,13 @@ class Category(MPTTModel, DT):
         return reverse('posts:category', args=[self.slug])
 
 
-class Post(DT, SEO):
-    STATUS_CHOICES = (
-        ('scheduled', 'Scheduled'),
-        ('published', 'Published'),
-    )
+class StatusChoices(Enum):
+    SCHEDULED = '0'
+    PUBLISHED = '1'
+
+
+class Post(AbstractDateTime, SEO):
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -104,8 +106,8 @@ class Post(DT, SEO):
     )
     status = models.CharField(
         max_length=20,
-        choices=STATUS_CHOICES,
-        default='published'
+        choices=[(status.value,status.name) for status in StatusChoices],
+        default=StatusChoices.PUBLISHED.value
     )
 
     objects = PostManager()
@@ -127,7 +129,7 @@ def average_rating(self):
     return ratings.aggregate(models.Avg('rating'))['rating__avg']
 
 
-class Comment(MPTTModel, DT):
+class Comment(MPTTModel, AbstractDateTime):
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
@@ -173,7 +175,7 @@ class Comment(MPTTModel, DT):
         return self.clike.count()
 
 
-class Bookmark(DT):
+class Bookmark(AbstractDateTime):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -184,7 +186,7 @@ class Bookmark(DT):
     )
 
 
-class Like(DT):
+class Like(AbstractDateTime):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ulike')
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="clike")
 
