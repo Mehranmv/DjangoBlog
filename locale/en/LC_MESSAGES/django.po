@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-26 12:29+0330\n"
+"POT-Creation-Date: 2023-10-07 20:26+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: A/settings.py:128
+#: A/settings.py:114
 msgid "Farsi"
 msgstr "persian"
 
-#: A/settings.py:129
+#: A/settings.py:115
 msgid "English"
 msgstr "english"
 
@@ -42,12 +42,12 @@ msgid "کلمه عبور"
 msgstr "password"
 
 #: accounts/forms.py:44 accounts/templates/accounts/profile.html:36
-#: posts/models.py:144
+#: posts/models.py:155
 msgid "ایمیل"
 msgstr "email"
 
 #: accounts/forms.py:53 home/models.py:10 posts/models.py:19
-#: posts/models.py:139
+#: posts/models.py:150
 msgid "نام"
 msgstr "first name"
 
@@ -59,33 +59,47 @@ msgstr "last name"
 msgid "کد تخفیف دارید ؟ وارد کنید"
 msgstr "Enter coupon code"
 
-#: accounts/models.py:10
+#: accounts/models.py:12
 msgid "کد"
 msgstr "code"
 
-#: accounts/models.py:16
-msgid "درصد تخفیف"
+#: accounts/models.py:15
+#, fuzzy
+#| msgid "درصد تخفیف"
+msgid "مفدار تخفیف"
 msgstr "discount percentage"
 
-#: accounts/models.py:23
-msgid "مبلغ تخفیف"
+#: accounts/models.py:18
+#, fuzzy
+#| msgid "درصد تخفیف"
+msgid "درصدی"
+msgstr "discount percentage"
+
+#: accounts/models.py:21
+#, fuzzy
+#| msgid "مبلغ تخفیف"
+msgid "مبلغی"
 msgstr "discount money"
 
-#: accounts/models.py:30
+#: accounts/models.py:27
 msgid "سقف مبلع تخفیف"
 msgstr "Maximum discount"
 
-#: accounts/models.py:37
+#: accounts/models.py:33
 msgid "تعداد استفاده"
 msgstr "Number of uses"
 
-#: accounts/models.py:41 accounts/models.py:42
+#: accounts/models.py:37 accounts/models.py:38
 #, fuzzy
 #| msgid "درصد تخفیف"
 msgid "کد تخفیف"
 msgstr "discount code"
 
-#: accounts/models.py:68 accounts/models.py:69
+#: accounts/models.py:54 accounts/models.py:75
+msgid "Code is expired"
+msgstr "Code is expired"
+
+#: accounts/models.py:106 accounts/models.py:107
 msgid "حساب ویژه"
 msgstr "Membership"
 
@@ -99,7 +113,7 @@ msgid "بازگشت به پروفایل"
 msgstr "Back to profile"
 
 #: accounts/templates/accounts/bookmarked_posts.html:29
-#: home/templates/home/index.html:70 home/templates/home/search.html:27
+#: home/templates/home/index.html:81 home/templates/home/search.html:27
 #: posts/templates/posts/category.html:50
 msgid "بیشتر بخوانید"
 msgstr "Read more"
@@ -108,7 +122,7 @@ msgstr "Read more"
 msgid "بسته مورد نظر خود را انتخاب کنید"
 msgstr "Choose the package you want"
 
-#: accounts/templates/accounts/buy_membership.html:15 accounts/views.py:221
+#: accounts/templates/accounts/buy_membership.html:15 accounts/views.py:198
 msgid "طلایی"
 msgstr "gold"
 
@@ -130,7 +144,7 @@ msgstr "View featured posts"
 msgid "پرداخت"
 msgstr "pay"
 
-#: accounts/templates/accounts/buy_membership.html:31 accounts/views.py:223
+#: accounts/templates/accounts/buy_membership.html:31 accounts/views.py:200
 msgid "الماسی"
 msgstr "diamond"
 
@@ -233,6 +247,10 @@ msgstr "Have an account?"
 msgid "وارد شوید"
 msgstr "Login"
 
+#: accounts/templates/admin/accounts/coupon/change_form.html:5
+msgid "Generate-Code"
+msgstr "Generate-Code"
+
 #: accounts/views.py:53
 msgid "نام کاربری یا کلمه عبور اشتباه است"
 msgstr "Username or Password wrong"
@@ -245,15 +263,11 @@ msgstr "Logged Out"
 msgid "حساب کاربری شما با موفقیت ایجاد شد !"
 msgstr "Your account created successfully"
 
-#: accounts/views.py:156
-msgid "کد منقضی شده"
-msgstr "The code has expired"
-
-#: accounts/views.py:196
+#: accounts/views.py:173
 msgid "شما از قبل اکانت ویژه دارید"
 msgstr "You already have a special account"
 
-#: home/apps.py:7
+#: home/apps.py:8
 msgid "صفحه اصلی"
 msgstr "Home page"
 
@@ -261,16 +275,16 @@ msgstr "Home page"
 msgid "به دنبال چه می‌گردید؟"
 msgstr "Search...."
 
-#: home/models.py:15 pages/models.py:17 pages/models.py:39 pages/models.py:61
-#: pages/models.py:83 posts/models.py:24 posts/models.py:80
+#: home/models.py:17 pages/models.py:17 pages/models.py:46 pages/models.py:75
+#: pages/models.py:104 posts/models.py:26 posts/models.py:88
 msgid "اسلاگ"
 msgstr "Slug"
 
-#: home/models.py:19
+#: home/models.py:23
 msgid "لینک صفحه"
 msgstr "Page URL"
 
-#: home/models.py:27 home/models.py:28
+#: home/models.py:31 home/models.py:32
 msgid "منو"
 msgstr "menu"
 
@@ -299,7 +313,7 @@ msgstr "Next"
 msgid "آخرین صفحه"
 msgstr "Last page"
 
-#: home/templates/home/index.html:47
+#: home/templates/home/index.html:51
 msgid "آخرین مطالب "
 msgstr "The latest content"
 
@@ -319,7 +333,7 @@ msgstr ""
 "Sorry, but nothing matched your search criteria. Please try again with some "
 "different keywords."
 
-#: home/templates/home/search.html:42 templates/inc/navbar.html:39
+#: home/templates/home/search.html:42 templates/inc/navbar.html:38
 msgid "جستجو"
 msgstr "Search"
 
@@ -327,11 +341,11 @@ msgstr "Search"
 msgid "صفحه ها"
 msgstr "Pages"
 
-#: pages/models.py:13 pages/models.py:35 pages/models.py:57 pages/models.py:79
+#: pages/models.py:13 pages/models.py:42 pages/models.py:71 pages/models.py:100
 msgid "عنوان صفحه"
 msgstr "Title"
 
-#: pages/models.py:21 pages/models.py:43 pages/models.py:65 pages/models.py:87
+#: pages/models.py:21 pages/models.py:50 pages/models.py:79 pages/models.py:108
 msgid "محتوای صفحه"
 msgstr "Body"
 
@@ -339,15 +353,15 @@ msgstr "Body"
 msgid "درباره ما"
 msgstr "About us"
 
-#: pages/models.py:47 pages/models.py:48
+#: pages/models.py:54 pages/models.py:55
 msgid "تماس با ما"
 msgstr "Contact us"
 
-#: pages/models.py:69 pages/models.py:70
+#: pages/models.py:83 pages/models.py:84
 msgid "پرسش های متداول"
 msgstr "common questions"
 
-#: pages/models.py:91 pages/models.py:92
+#: pages/models.py:112 pages/models.py:113
 msgid "قوانین"
 msgstr "Rules"
 
@@ -370,59 +384,85 @@ msgstr[1] ""
 "Please correct the errors\n"
 "                            below."
 
-#: posts/admin.py:14
-msgid "تایید کردن دیدگاه ها"
-msgstr "Approve comments"
+#: posts/admin.py:23
+#, fuzzy
+#| msgid "دسته بندی"
+msgid "اسم دسته بندی"
+msgstr "Category"
 
-#: posts/admin.py:19 posts/models.py:91
-msgid "نمایش در کاروسل"
-msgstr "Show in the carousel"
+#: posts/admin.py:32
+#, fuzzy
+#| msgid "دسته بندی"
+msgid "اسلاگ دسته بندی"
+msgstr "Category"
 
-#: posts/admin.py:24
-msgid " عدم نمایش در کاروسل"
-msgstr "No display in the carousel"
+#: posts/admin.py:41
+#, fuzzy
+#| msgid "دسته بندی ها"
+msgid "تنظیمات دسته بندی ها"
+msgstr "Categories"
 
-#: posts/admin.py:60
-msgid "عنوان و اسلاگ"
+#: posts/admin.py:71
+#, fuzzy
+#| msgid "عنوان و اسلاگ"
+msgid "عنوان و اسلاگ فارسی"
 msgstr "ُTitle and Slug"
 
-#: posts/admin.py:67 posts/models.py:84
+#: posts/admin.py:77
+#, fuzzy
+#| msgid "عنوان و اسلاگ"
+msgid "عنوان و اسلاگ انگلیسی "
+msgstr "ُTitle and Slug"
+
+#: posts/admin.py:83 posts/models.py:94
 msgid "تصویر پست"
 msgstr "Post Photo"
 
-#: posts/admin.py:73 posts/models.py:87
+#: posts/admin.py:89 posts/models.py:97
 msgid "محتوای پست"
 msgstr "Post Body"
 
-#: posts/admin.py:79
+#: posts/admin.py:95
 msgid " زمانبندی انتشار"
 msgstr "Release schedule"
 
-#: posts/admin.py:85
+#: posts/admin.py:101
 msgid "تنظیمات سئو"
 msgstr "SEO settings"
 
-#: posts/admin.py:91
+#: posts/admin.py:107
 msgid "تنظیمات نمایش "
 msgstr "Display settings"
 
-#: posts/admin.py:113
+#: posts/admin.py:114 posts/models.py:103
+msgid "نمایش در کاروسل"
+msgstr "Show in the carousel"
+
+#: posts/admin.py:118
+msgid " عدم نمایش در کاروسل"
+msgstr "No display in the carousel"
+
+#: posts/admin.py:138
 msgid "نام و ایمیل"
 msgstr "Name and Email"
 
-#: posts/admin.py:119 posts/models.py:148
+#: posts/admin.py:144 posts/models.py:159
 msgid "نظر"
 msgstr "Comment"
 
-#: posts/admin.py:125
+#: posts/admin.py:150
 msgid "تایید کردن"
 msgstr "Approve"
 
-#: posts/admin.py:131
+#: posts/admin.py:156
 msgid "ریپلای"
 msgstr "Reply"
 
-#: posts/apps.py:8 posts/models.py:116
+#: posts/admin.py:163
+msgid "تایید کردن دیدگاه ها"
+msgstr "Approve comments"
+
+#: posts/apps.py:8 posts/models.py:128
 msgid "پست ها"
 msgstr "Posts"
 
@@ -438,57 +478,57 @@ msgstr "example : Mehran Mirzaei"
 msgid "مثال : mehranmirzaeiv@gmail.com"
 msgstr "example : mehranmirzaeiv@gmail.com"
 
-#: posts/models.py:28
+#: posts/models.py:32
 msgid "زیر مجموعه"
 msgstr "parent"
 
-#: posts/models.py:42 posts/models.py:66
+#: posts/models.py:46 posts/models.py:70
 msgid "دسته بندی"
 msgstr "Category"
 
-#: posts/models.py:43
+#: posts/models.py:47
 msgid "دسته بندی ها"
 msgstr "Categories"
 
-#: posts/models.py:61
+#: posts/models.py:65
 msgid "کاریر"
 msgstr "User"
 
-#: posts/models.py:71 utils.py:33
+#: posts/models.py:75 utils.py:32
 msgid "عنوان"
 msgstr "Title"
 
-#: posts/models.py:75 utils.py:38
+#: posts/models.py:81 utils.py:36
 msgid "توضیح کوتاه پست"
 msgstr "Short description of the post"
 
-#: posts/models.py:95
+#: posts/models.py:107
 msgid "نمایش پست"
 msgstr "Show post"
 
-#: posts/models.py:99
+#: posts/models.py:111
 #, fuzzy
 #| msgid "دیدن پست های ویژه"
 msgid "برای اکانت های ویژه"
 msgstr "View featured posts"
 
-#: posts/models.py:102
+#: posts/models.py:114
 msgid "زمان انتشار"
 msgstr "publication date"
 
-#: posts/models.py:115
+#: posts/models.py:127
 msgid "پست"
 msgstr "Post"
 
-#: posts/models.py:159
+#: posts/models.py:170
 msgid "تایید شده"
 msgstr "Accepted"
 
-#: posts/models.py:167
+#: posts/models.py:178
 msgid "دیدگاه"
 msgstr "Comment"
 
-#: posts/models.py:168
+#: posts/models.py:179
 msgid " دیدگاه ها"
 msgstr "Comments"
 
@@ -496,24 +536,24 @@ msgstr "Comments"
 msgid "آخرین مطالب دسته:"
 msgstr "Last Posts :"
 
-#: posts/templates/posts/detail.html:16
+#: posts/templates/posts/detail.html:24
 msgid "صفحه اصلی "
 msgstr "Home page"
 
-#: posts/templates/posts/detail.html:36 posts/templates/posts/detail.html:131
+#: posts/templates/posts/detail.html:49 posts/templates/posts/detail.html:145
 msgid "ذخیره شده"
 msgstr "Saved"
 
-#: posts/templates/posts/detail.html:45 posts/templates/posts/detail.html:50
-#: posts/templates/posts/detail.html:134
+#: posts/templates/posts/detail.html:59 posts/templates/posts/detail.html:64
+#: posts/templates/posts/detail.html:148
 msgid "ذخیره کردن"
 msgstr "Save"
 
-#: posts/templates/posts/detail.html:66
+#: posts/templates/posts/detail.html:80
 msgid "نویسنده :"
 msgstr "Auther :"
 
-#: posts/templates/posts/detail.html:91
+#: posts/templates/posts/detail.html:105
 msgid "آخرین مطالب این دسته"
 msgstr "Latest Category Posts:"
 
@@ -545,11 +585,11 @@ msgstr "Send"
 msgid "برای نمایش این پست باید اکانت ویژه تهیه کنید !"
 msgstr ""
 
-#: posts/views.py:72 posts/views.py:88
+#: posts/views.py:83 posts/views.py:99
 msgid "نظر شما ثبت و پس از تایید به کاربران نمایش داده میشود"
 msgstr "Your comment will be recorded and displayed to users after approval"
 
-#: templates/base.html:12 templates/inc/navbar.html:6
+#: templates/base.html:13 templates/inc/navbar.html:5
 msgid "پروژه وبلاگ"
 msgstr "Blog Project"
 
@@ -573,14 +613,17 @@ msgstr "Django"
 msgid "برگشتن به بالا"
 msgstr "back to top"
 
-#: templates/inc/navbar.html:12
+#: templates/inc/navbar.html:11
 msgid "< دسته بندی مطالب"
 msgstr " Category>"
 
-#: utils.py:43
+#: utils.py:40
 msgid "کلمات کلیدی"
 msgstr "key words"
 
-#: utils.py:44
+#: utils.py:41
 msgid "بازی  - بازی اندروید  - برنامه اندروید - نقد و بررسی - فیم و سریال"
 msgstr "Game - Android game - Android app - reviews - movies and series"
+
+#~ msgid "کد منقضی شده"
+#~ msgstr "The code has expired"

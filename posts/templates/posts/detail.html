@@ -26,7 +26,7 @@
                     {% for ancestor in ancestors %}
                         {% if post.category == ancestor %}
                             <li class="breadcrumb-item "><a
-                                    href="{{ ancestor.get_absolute_url }}">{{ ancestor.name }}</a></li>
+                                    href="{{ ancestor.get_absolute_url }}">{{ ancestor.title }}</a></li>
                         {% endif %}
                     {% endfor return JsonResponse({}, status=400) %}
                     <li><a style="color: #0253c7" href="{% url 'posts:post_detail' post.slug %}">{{ post.title }}</a>

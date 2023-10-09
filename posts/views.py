@@ -56,9 +56,11 @@ class PostDetailView(View):
 
             except Bookmark.DoesNotExist:
                 is_bookmarked = False
-        elif not request.user.is_authenticated:
+        elif not request.user.is_authenticated and post.is_membership_item:
             messages.error(request, 'برای دیدن پست های ویژه باید وارد شوید', 'danger')
             return redirect('home:home_page')
+        else:
+            pass
 
         context = {
             "post": post,

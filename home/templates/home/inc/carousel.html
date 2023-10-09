@@ -1,4 +1,7 @@
+{% load i18n %}
 {% load jformat %}
+{#{% get_current_language as LANGUAGE_BIDI %}#}
+{##}
 <div class="carousel-inner rounded" style="margin-bottom: 100px">
     <div class="carousel-item active">
         <a href="{% url 'posts:post_detail' posts.first.slug %}">
@@ -7,7 +10,14 @@
                  style="--bs-bg-opacity: .7;">
                 <h5>{{ posts.first.title }}</h5>
                 <p>{{ posts.first.description }}</p>
-                <p>{{ posts.first.updated_jalali | jformat:"%d %B %Y" }}</p>
+                <p>
+
+                    {% if LANGUAGE_BIDI == 'fa' %}
+                        {{ posts.first.updated_jalali | jformat:"%d %B %Y" }}
+                    {% else %}
+                        {{ posts.first.updated | date:'d b Y' }}
+                    {% endif %}
+                </p>
             </div>
         </a>
     </div>
@@ -20,18 +30,27 @@
                          style="--bs-bg-opacity: .7;">
                         <h5>{{ foo.title }}</h5>
                         <p>{{ foo.description }}</p>
-                        <p>{{ foo.updated_jalali | jformat:"%d %B %Y" }}</p>
+                        <p>
+                            {{ foo.updated_jalali | jformat:"%d %B %Y" }}
+                            {% if LANGUAGE_BIDI == 'fa' %}
+                                {{ posts.updated_jalali | jformat:"%d %B %Y" }}
+                            {% else %}
+                                {{ posts.updated | date:'d b Y' }}
+                            {% endif %}
+                        </p>
                     </div>
                 </a>
             </div>
         {% endif %}
     {% endfor %}
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" style="background-color: black;border-radius: 100%" aria-hidden="true"></span>
+        <span class="carousel-control-prev-icon" style="background-color: black;border-radius: 100%"
+              aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" style="background-color: black;border-radius: 100%" aria-hidden="true"></span>
+        <span class="carousel-control-next-icon" style="background-color: black;border-radius: 100%"
+              aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
 </div>

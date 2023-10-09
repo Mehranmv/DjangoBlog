@@ -9,23 +9,54 @@ from mptt.admin import MPTTModelAdmin
 
 @admin.register(Category)
 class CategoryAdmin(MPTTModelAdmin):
-    list_display = ('name', 'slug', 'is_sub')
+    list_display = ('title_fa', 'slug_fa', 'is_sub')
     prepopulated_fields = {
-        'slug': ('name',),
+        'slug_fa': ('title_fa',),
+        'slug_en': ('title_en',),
+
     }
-    search_fields = ('name', 'slug')
+    search_fields = ('title_fa', 'slug_fa')
     list_filter = ('is_sub',)
+
+    fieldsets = [
+        (
+            _("اسم دسته بندی"),
+            {
+                'fields': [
+                    'title_fa',
+                    'title_en',
+                ],
+            }
+        ),
+        (
+            _("اسلاگ دسته بندی"),
+            {
+                'fields': [
+                    'slug_fa',
+                    'slug_en',
+                ],
+            }
+        ),
+        (
+            _("تنظیمات دسته بندی ها"),
+            {
+                'fields': [
+                    'is_sub',
+                    'parent'
+                ]
+            }
+        )
+    ]
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user', 'category',)
+    list_display = ('title_fa', 'user', 'category',)
     list_filter = ('category',)
-    search_fields = ('title', 'body')
+    search_fields = ('title_fa', 'body_fa')
     prepopulated_fields = {
-        'slug': ('title',),
-        'seo_title': ('title',),
-        "seo_description": ('description',)
+        'slug_fa': ('title_fa',),
+        'slug_en': ("title_en",),
     }
     raw_id_fields = ('category', 'user')
     fieldsets = [
@@ -37,10 +68,15 @@ class PostAdmin(admin.ModelAdmin):
         ),
 
         (
-            _("عنوان و اسلاگ"),
+            _("عنوان و اسلاگ فارسی"),
             {
-                "fields": ["title", "slug", "description"],
-
+                "fields": ["title_fa", "slug_fa", "description_fa"],
+            },
+        ),
+        (
+            _("عنوان و اسلاگ انگلیسی "),
+            {
+                "fields": ["title_en", "slug_en", "description_en"],
             }
         ),
         (
@@ -52,7 +88,7 @@ class PostAdmin(admin.ModelAdmin):
         (
             _("محتوای پست"),
             {
-                "fields": ["body"],
+                "fields": ["body_fa", "body_en"],
             },
         ),
         (

@@ -15,12 +15,15 @@
                                         {% if not node.is_leaf_node %}
                                             <li class="nav-item {% if not node.is_leaf_node %} dropdown {% endif %}">
                                                 <a class="nav-link {% if not node.is_leaf_node %} dropdown-toggle {% endif %} "
-                                                        {% if not node.is_leaf_node %} data-bs-toggle="dropdown" {% endif %}
-                                                   href="{{ node.link }}" style="color: white;padding-left: 15px;">{{ node.name }}</a>
+                                                        {% if not node.is_leaf_node %}
+                                                   data-bs-toggle="dropdown" {% endif %}
+                                                   href="{{ node.link }}"
+                                                   style="color: white;padding-left: 15px;">{{ node.title }}</a>
                                                 {% if not node.is_leaf_node %}
                                                     <ul class="dropdown-menu dropdown-submenu">
                                                         <li>
-                                                            <a href="{{ node.link }}" class="dropdown-item">{{ children }}</a>
+                                                            <a href="{{ node.link }}"
+                                                               class="dropdown-item">{{ children }}</a>
                                                         </li>
                                                     </ul>
                                                 {% endif %}
@@ -28,7 +31,7 @@
                                         {% else %}
                                             <li>
                                                 <a class="nav-link dropdown-item" href="{{ node.link }}"
-                                                   style="color: white;padding-left: 15px;font-weight: bold;"> {{ node.name }}</a>
+                                                   style="color: white;padding-left: 15px;font-weight: bold;"> {{ node.title }}</a>
                                             </li>
                                         {% endif %}
                                     {% endrecursetree %}
@@ -53,17 +56,22 @@
                             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                 <div class="col p-4 d-flex flex-column position-static">
                                     <strong class="d-inline-block mb-2 text-success-emphasis">{{ posts.category.get }}</strong>
-                                    <a href="{{ posts.get_absolute_url }}" style="text-decoration: none;"><h5 style="padding-bottom: 5px;"
-                                                                                                              class="mb-3">{{ posts.title }}</h5>
+                                    <a href="{{ posts.get_absolute_url }}" style="text-decoration: none;"><h5
+                                            style="padding-bottom: 5px;"
+                                            class="mb-3">{{ posts.title }}</h5>
                                     </a>
                                     <p class="mb-auto">{{ posts.description }} </p>
                                     <div class="mb-2 text-body-secondary">
                                         <p style="display: inline"><i class="fas fa-clock fa-xs"></i>
-                                            {% if LANGUAGE_BIDI == 'fa' %} {{ posts.updated_jalali | jformat:"%d %b %Y" }} {% else %}
-                                                {{ posts.updated | date:'d b Y' }} {% endif %}
+                                            {% if LANGUAGE_BIDI == 'fa' %}
+                                                {{ posts.updated_jalali | jformat:"%d %B %Y" }}
+                                            {% else %}
+                                                {{ posts.updated | date:'d b Y' }}
+                                            {% endif %}
                                         </p>
                                         <a href="{{ posts.category.get_absolute_url }}"
-                                           class="text-primary"> <i class="fas fa-folder fa-xs"></i> {{ posts.category }}</a>
+                                           class="text-primary"> <i
+                                                class="fas fa-folder fa-xs"></i> {{ posts.category }}</a>
                                         <p style="display:inline;"><i
                                                 class="fas fa-user fa-xs"></i>{{ posts.user.first_name }} {{ posts.user.last_name }}
                                         </p>
@@ -75,7 +83,8 @@
                                 </div>
                                 <div class="col-auto d-none d-lg-inline">
                                     <a href="{{ posts.get_absolute_url }}">
-                                        <img width="500px" style="border-radius: 0 10px 10px 0 ;" src="{{ posts.thumbnail.url }}"
+                                        <img width="500px" style="border-radius: 0 10px 10px 0 ;"
+                                             src="{{ posts.thumbnail.url }}"
                                              alt="{{ posts.title }}">
                                     </a>
                                 </div>

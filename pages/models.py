@@ -30,6 +30,9 @@ class AboutUs(AbstractDateTime):
 
     @classmethod
     def create_or_get_default(cls):
+        """
+        this is for when we don't have page
+        """
         record = cls.objects.last()
         if record:
             return record

@@ -13,11 +13,14 @@ from random import sample
 class HomePage(View):
 
     def get(self, request):
-        posts = Post.objects.filter(display_post=True, status=StatusChoices.PUBLISHED.value)
-        carousel_posts = posts.filter(is_carousel_item=True, status=StatusChoices.PUBLISHED.value)
+        """
+        show_filter and carousel_posts_filter are two manager for Post module
+        """
+        posts = Post.objects.show_filter()
+        carousel_posts = Post.objects.carousel_posts_filter()
         menu_items = MenuItem.objects.all()
         if carousel_posts.exists():
-            if carousel_posts.count() < 4:
+            if carousel_posts.count() < 4 and carousel_posts.count() != 0:
                 carousel_items = carousel_posts
             else:
                 carousel_items = sample(list(carousel_posts), 4)
@@ -35,10 +38,14 @@ class HomePage(View):
 
 
 class SearchView(View):
+    """
+    the search is using pg_trgm of Postgresql for similarity
+    """
     def get(self, request):
         posts = Post.objects.all()
         search_query = request.GET.get('search')
-        posts = posts.annotate(similarity=TrigramWordSimilarity(search_query, 'title')).filter(
+        posts = posts.annotate(
+            similarity=TrigramWordSimilarity(search_query, expression='title_fa')).filter(
             similarity__gt=0.3).order_by('-similarity')
         context = {
             'posts': posts,

@@ -8,4 +8,7 @@ class CommentManager(models.Manager):
 
 class PostManager(models.Manager):
     def show_filter(self):
-        return self.filter(display_post=True, status='published')
+        return self.filter(display_post=True, status='1')
+
+    def carousel_posts_filter(self):
+        return self.filter(display_post=True, is_carousel_item=True, status='1')

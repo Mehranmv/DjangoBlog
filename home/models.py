@@ -5,14 +5,18 @@ from django.utils.translation import gettext_lazy as _
 
 
 class MenuItem(MPTTModel):
-    name = models.CharField(
+    title = models.CharField(
         max_length=100,
-        verbose_name=_("نام")
+        verbose_name=_("نام"),
+        blank=True,
+        null=True
     )
     slug = models.SlugField(
         unique=True,
         allow_unicode=True,
-        verbose_name=_("اسلاگ")
+        verbose_name=_("اسلاگ"),
+        blank=True,
+        null=True
     )
     link = models.CharField(
         max_length=1000,
@@ -21,11 +25,11 @@ class MenuItem(MPTTModel):
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
     class MPTTMeta:
-        order_insertion_by = ['name']
+        order_insertion_by = ['title']
 
     class Meta:
         verbose_name = _('منو')
         verbose_name_plural = _('منو')
 
     def __str__(self):
-        return self.name
+        return self.title

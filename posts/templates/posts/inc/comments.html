@@ -37,12 +37,14 @@
                                                 <div>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <p class="mb-1">
-                                                            {{ node.name }} <span class="small">- {{ node.email }}</span>
+                                                            {{ node.name }} <span
+                                                                class="small">- {{ node.email }}</span>
                                                         </p>
                                                         <div class="dropdown dropstart">
                                                             <a href="{% url 'posts:comment_like' node.id %}"><i
-                                                                    class="fa fa-thumbs-up fa-s" aria-hidden="true"></i> {% if node.like_count != 0 %}
-                                                                | {{ node.like_count }} {% endif %}</a>
+                                                                    class="fa fa-thumbs-up fa-s" aria-hidden="true"></i>
+                                                                {% if node.like_count != 0 %}
+                                                                    | {{ node.like_count }} {% endif %}</a>
                                                             <a role="button" class="" style="color: #005fe8"
                                                                data-bs-toggle="dropdown" aria-expanded="false"
                                                                data-bs-auto-close="outside">
@@ -67,7 +69,7 @@
                                                 {% if not node.is_leaf_node %}
                                                     <div class="d-flex flex-start mt-4 me-5 ">
                                                         <div class="flex-grow-1 flex-shrink-1">
-                                                            {{ children }}
+                                                            {{children}}
                                                         </div>
                                                     </div>
                                                 {% endif %}
@@ -75,12 +77,14 @@
                                                 <div>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <p class="mb-1">
-                                                            {{ node.name }} <span class="small">- {{ node.email }}</span>
+                                                            {{ node.name }} <span
+                                                                class="small">- {{ node.email }}</span>
                                                         </p>
                                                         <div class="dropdown dropstart">
-                                                             <a href="{% url 'posts:comment_like' node.id %}"><i
-                                                                    class="fa fa-thumbs-up fa-s" aria-hidden="true"></i> {% if node.like_count != 0 %}
-                                                                | {{ node.like_count }} {% endif %}</a>
+                                                            <a href="{% url 'posts:comment_like' node.id %}"><i
+                                                                    class="fa fa-thumbs-up fa-s" aria-hidden="true"></i>
+                                                                {% if node.like_count != 0 %}
+                                                                    | {{ node.like_count }} {% endif %}</a>
                                                             <a role="button" class="" style="color: #005fe8"
                                                                data-bs-toggle="dropdown" aria-expanded="false"
                                                                data-bs-auto-close="outside">
@@ -92,7 +96,8 @@
                                                                   class="dropdown-menu p-4">
                                                                 {% csrf_token %}
                                                                 {{ reply_form.as_p }}
-                                                                <input type="submit" class="btn" value="{% trans 'ارسال دید‌گاه' %}"
+                                                                <input type="submit" class="btn"
+                                                                       value="{% trans 'ارسال دید‌گاه' %}"
                                                                        style="background-color: #0047AD;">
                                                             </form>
                                                         </div>
@@ -114,5 +119,4 @@
         </div>
     </div>
     <br/>
-    {% include 'inc/messages.html' %}
 </section>

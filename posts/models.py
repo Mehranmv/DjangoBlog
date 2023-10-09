@@ -14,14 +14,18 @@ from enum import Enum
 
 
 class Category(MPTTModel, AbstractDateTime):
-    name = models.CharField(
+    title = models.CharField(
         max_length=50,
-        verbose_name=_("نام")
+        verbose_name=_("نام"),
+        blank=True,
+        null=True
     )
     slug = models.SlugField(
         unique=True,
         allow_unicode=True,
-        verbose_name=_("اسلاگ")
+        verbose_name=_("اسلاگ"),
+        blank=True,
+        null=True
     )
     is_sub = models.BooleanField(
         default=False,
@@ -36,14 +40,14 @@ class Category(MPTTModel, AbstractDateTime):
     )
 
     class MPTTMeta:
-        order_insertion_by = ['name']
+        order_insertion_by = ['title']
 
     class Meta:
         verbose_name = _('دسته بندی')
         verbose_name_plural = _('دسته بندی ها')
 
     def __str__(self):
-        return self.name
+        return self.title
 
     def get_absolute_url(self):
         return reverse('posts:category', args=[self.slug])
@@ -55,7 +59,6 @@ class StatusChoices(Enum):
 
 
 class Post(AbstractDateTime, SEO):
-
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -70,22 +73,30 @@ class Post(AbstractDateTime, SEO):
     title = models.CharField(
         max_length=255,
         verbose_name=_('عنوان'),
+        blank=True,
+        null=True
     )
     description = models.CharField(
         max_length=120,
-        verbose_name=_('توضیح کوتاه پست')
+        verbose_name=_('توضیح کوتاه پست'),
+        blank=True,
+        null=True
     )
     slug = models.SlugField(
         allow_unicode=True,
         max_length=255,
-        verbose_name=_("اسلاگ")
+        verbose_name=_("اسلاگ"),
+        blank=True,
+        null=True
     )
     thumbnail = models.ImageField(
         upload_to="post/",
         verbose_name=_("تصویر پست")
     )
     body = RichTextUploadingField(
-        verbose_name=_("محتوای پست")
+        verbose_name=_("محتوای پست"),
+        blank=True,
+        null=True
     )
     is_carousel_item = models.BooleanField(
         default=False,
@@ -106,7 +117,7 @@ class Post(AbstractDateTime, SEO):
     )
     status = models.CharField(
         max_length=20,
-        choices=[(status.value,status.name) for status in StatusChoices],
+        choices=[(status.value, status.name) for status in StatusChoices],
         default=StatusChoices.PUBLISHED.value
     )
 
@@ -123,10 +134,9 @@ class Post(AbstractDateTime, SEO):
     def get_absolute_url(self):
         return reverse('posts:post_detail', args=[self.slug])
 
-
-def average_rating(self):
-    ratings = Rating.objects.filter(object_id=self.id, content_type__model='post')
-    return ratings.aggregate(models.Avg('rating'))['rating__avg']
+    def average_rating(self):
+        ratings = Rating.objects.filter(object_id=self.id, content_type__model='post')
+        return ratings.aggregate(models.Avg('rating'))['rating__avg']
 
 
 class Comment(MPTTModel, AbstractDateTime):

@@ -50,8 +50,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -172,13 +172,13 @@ template_name = "star_ratings/widget.html"
 MERCHANT = os.environ.get("MERCHANT")
 SANDBOX = True
 
-# Use the default language as the fallback language
 MODELTRANSLATION_FALLBACK_LANGUAGES = (LANGUAGE_CODE,)
 
-# Use the default language as the base language for translations
 MODELTRANSLATION_DEFAULT_LANGUAGE = LANGUAGE_CODE
 
-# Enable translation for all models
 MODELTRANSLATION_TRANSLATION_FILES = (
-    'posts.translation',  # replace with your app name
+    'posts.translation',
+    'home.translation'
 )
+
+# settings.py
