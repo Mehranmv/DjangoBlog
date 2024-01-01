@@ -1,4 +1,3 @@
-Here's a template for a `README.md` file for the DjangoBlog GitHub repository:
 
 ```markdown
 # DjangoBlog
