@@ -29,34 +29,31 @@ A step by step series of examples that tell you how to get a development environ
 
 1. Clone the repository:
 
-```
 git clone https://github.com/Mehranmv/DjangoBlog.git
-```
 
 2. Navigate to the project directory:
 
-```
 cd DjangoBlog
-```
+
 
 3. Create a virtual environment (optional):
 
-```
+
 virtualenv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-```
+
 
 4. Install the required packages:
 
-```
+
 pip install -r requirements.txt
-```
+
 
 5. Run the development server:
 
-```
+
 python manage.py runserver
-```
+
 
 6. Open your browser and go to `http://localhost:8000`.
 
